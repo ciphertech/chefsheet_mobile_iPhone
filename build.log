@@ -1,0 +1,175 @@
+Logfile initialized
+[INFO] logfile = /Users/test/Desktop/ChefSheet_Mobile_IPhone/build.log
+[DEBUG] /Users/test/Library/Application Support/Titanium/mobilesdk/osx/3.0.0.GA/android/builder.py simulator ChefSheet Mobile /Users/test/Documents /Users/test/Desktop/ChefSheet_Mobile_IPhone com.chefsheet.mobile  4 HVGA 
+[INFO] Building ChefSheet Mobile for Android ... one moment
+[INFO] Titanium SDK version: 3.0.0 (12/12/12 18:49 a5894b3)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 0 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 35 seconds)
+[DEBUG] waited 35.467101 seconds on emulator to get ready
+[INFO] Waiting for the Android Emulator to become available
+[DEBUG] com.chefsheet.mobile  installed? False
+[INFO] Fastdev server running, deploying in Fastdev mode
+[INFO] Copying CommonJS modules...
+[INFO] Copying project resources..
+[INFO] Detected change in tiapp.xml, or assets deleted. Forcing full re-build...
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/appicon.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/appicon.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/default.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/app.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/app.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/14-tag.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/14-tag.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/14-tag@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/14-tag@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/17-bar-chart.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/17-bar-chart.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/17-bar-chart@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/17-bar-chart@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/179-notepad.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/179-notepad.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/179-notepad@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/179-notepad@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/19-check.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/19-check.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/19-check@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/19-check@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/20-gear2.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/20-gear2.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/20-gear2@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/20-gear2@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/21-circle-east.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/21-circle-east.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/21-circle-east@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/21-circle-east@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/25-circle-west.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/25-circle-west.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/25-circle-west@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/25-circle-west@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/48-fork-and-knife.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/48-fork-and-knife.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/48-fork-and-knife@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/48-fork-and-knife@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/56-cloud.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/56-cloud.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/56-cloud@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/56-cloud@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/83-calendar.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/83-calendar.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/83-calendar@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/83-calendar@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/bb-title.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/bb-title.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/bb-title@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/bb-title@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/bg.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/bg.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/1.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/1.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/1@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/1@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/2.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/2.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/2@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/2@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/2a.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/2a.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/2a@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/2a@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/3.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/3.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/3@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/3@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/4.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/4.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/4@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/4@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/5.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/5.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/5@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/5@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/5a.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/5a.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/5a@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/5a@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/6.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/6.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/6@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/6@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/7.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/7.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/7@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/7@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/8.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/8.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/8@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/8@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/9.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/9.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/9@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/9@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg1.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg1.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg2.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg2.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg3.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg3.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg4.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg4.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg5.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg5.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg6.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg6.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg7.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg7.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg8.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg8.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/categories/bg9.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/categories/bg9.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/count-box.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/count-box.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/count-box@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/count-box@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/cs-signtitle.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/cs-signtitle.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/cs-signtitle@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/cs-signtitle@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/cs-title.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/cs-title.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/cs-title@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/cs-title@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/duplicate.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/duplicate.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/duplicate@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/duplicate@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/glosstop.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/glosstop.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/icon_arrow_left.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/icon_arrow_left.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/icon_arrow_right.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/icon_arrow_right.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/inputfield.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/inputfield.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/menu.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/menu.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/menu@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/menu@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/14-tag.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/14-tag.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/14-tag@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/14-tag@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/17-bar-chart.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/17-bar-chart.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/17-bar-chart@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/17-bar-chart@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/179-notepad.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/179-notepad.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/179-notepad@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/179-notepad@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/20-gear2.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/20-gear2.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/20-gear2@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/20-gear2@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/48-fork-and-knife.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/48-fork-and-knife.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/48-fork-and-knife@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/48-fork-and-knife@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/56-cloud.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/56-cloud.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/56-cloud@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/56-cloud@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/83-calendar.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/83-calendar.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/83-calendar@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/83-calendar@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/cs_navbar.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/cs_navbar.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/cs_navbar@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/cs_navbar@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/cs_navtitle.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/cs_navtitle.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/cs_navtitle@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/cs_navtitle@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/menu.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/menu.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/nav-icons/menu@2x.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/nav-icons/menu@2x.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/images/tableBG.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/images/tableBG.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/KS_nav_ui.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/KS_nav_ui.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/KS_nav_views.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/KS_nav_views.png
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/lib/moment.min.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/lib/moment.min.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/lib/require_patch.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/lib/require_patch.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/lib/underscore-min.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/lib/underscore-min.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/add.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/add.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/addcreate.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/addcreate.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/autoenter.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/autoenter.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/create.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/create.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/enter.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/enter.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/inventories.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/inventories.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/inventory.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/inventory.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/inventory/locations.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/inventory/locations.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/prices/add.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/prices/add.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/prices/index.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/prices/index.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/prices/price.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/prices/price.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/prices/product.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/prices/product.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/reports/index.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/reports/index.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/restaurants/index.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/restaurants/index.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/settings/show.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/settings/show.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/shared/default.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/shared/default.js
+[TRACE] COPYING CREATED FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/views/shared/signin.js => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/views/shared/signin.js
+[TRACE] Generating Java Classes
+[DEBUG] Processing Android resource drawables
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-land-hdpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-land-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-land-ldpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-land-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-port-hdpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-port-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-port-ldpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-port-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-hdpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-land-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-ldpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-land-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-mdpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-land-mdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-hdpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-port-hdpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-ldpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-port-ldpi/default_d44e27d97b.png
+[TRACE] COPYING FILE: /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-mdpi/default.png => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-port-mdpi/default_d44e27d97b.png
+[DEBUG] app stylesheet => /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/gen/com/chefsheet/mobile /ApplicationStylesheet.java
+[DEBUG] copying app icon: /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/appicon.png
+[DEBUG] generating theme.xml
+[DEBUG] found drawable-long-land-hdpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-land-hdpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-land-hdpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-land-hdpi/background.png
+[DEBUG] found drawable-long-land-ldpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-land-ldpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-land-ldpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-land-ldpi/background.png
+[DEBUG] found drawable-long-port-hdpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-port-hdpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-port-hdpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-port-hdpi/background.png
+[DEBUG] found drawable-long-port-ldpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-port-ldpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-long-port-ldpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-long-port-ldpi/background.png
+[DEBUG] found drawable-notlong-land-hdpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-hdpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-hdpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-land-hdpi/background.png
+[DEBUG] found drawable-notlong-land-ldpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-ldpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-ldpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-land-ldpi/background.png
+[DEBUG] found drawable-notlong-land-mdpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-mdpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-land-mdpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-land-mdpi/background.png
+[DEBUG] found drawable-notlong-port-hdpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-hdpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-hdpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-port-hdpi/background.png
+[DEBUG] found drawable-notlong-port-ldpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-ldpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-ldpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-port-ldpi/background.png
+[DEBUG] found drawable-notlong-port-mdpi splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-mdpi/default.png
+[DEBUG] copying /Users/test/Desktop/ChefSheet_Mobile_IPhone/Resources/android/images/res-notlong-port-mdpi/default.png splash screen to /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/res/drawable-notlong-port-mdpi/background.png
+[DEBUG] found splash screen at /Users/test/Desktop/ChefSheet_Mobile_IPhone/build/android/bin/assets/Resources/default.png
+[TRACE] Writing out AndroidManifest.xml
+[ERROR] Error generating R.java from manifest
+[INFO] Android Emulator has exited

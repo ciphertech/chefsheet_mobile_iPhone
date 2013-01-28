@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <deployment-targets>
+        <target device="mobileweb">false</target>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+    </deployment-targets>
+    <sdk-version>3.0.0.GA</sdk-version>
+    <id>com.chefsheet.mobile </id>
+    <name>ChefSheet Mobile</name>
+    <version>1.0</version>
+    <publisher>Kiko Taganashi</publisher>
+    <url>http://chefsheet.com</url>
+    <description>Issues fixed by Cipher Technologies for Iphone </description>
+    <copyright>2012 by Magical Market, Inc. All Rights Reserved.</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>TRANSLUCENT_BLACK</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>true</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>6247b02a-194e-4e4f-a66a-8c085ec70021</guid>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <modules/>
+</ti:app>
