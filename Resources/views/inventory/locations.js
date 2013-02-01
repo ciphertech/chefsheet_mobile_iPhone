@@ -6,8 +6,8 @@ var refresh = Titanium.UI.createButton({
 var restaurant_name = '';
 var inventory_name = '';
 
-
-
+var showerror = false;
+var showederror = false;
 // if (user_id == null) {
 // 	alert("no user, using:"+ Ti.App.Properties.getString('user_id'));
 // 	user_id = Ti.App.Properties.getString('user_id');
@@ -101,6 +101,16 @@ function setData() {
 		Titanium.App.fireEvent('hide_indicator');
   	};
 	xhr.onerror = function(e) {
+		try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online  && !showerror && !showederror) {
+			showederror = true;
+		alertnoInternet.show();
+		}
+		showerror = !showerror;
 				Ti.API.info("post error:" + e.error);
 	};
   	xhr.open('GET', global_url+"/api/v1/inventories/"+Ti.App.Properties.getString('inventory_id')+".json"+token_variable);
@@ -139,6 +149,20 @@ var tableview = Titanium.UI.createTableView({
 
 // create table view event listener
 tableview.addEventListener('click', function(e) {
+	
+	try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online) {
+			
+		alertnoInternet.show();
+		}
+		
+	
+	
+	
 	var index = e.index;
 	var section = e.section;
 
@@ -181,7 +205,7 @@ tableview.addEventListener('click', function(e) {
 win.add(tableview);
 
 refresh.addEventListener('click', function()
-{
+{showederror = false;
 	try{
 	Titanium.App.fireEvent('hide_indicator');
 	}catch(e)
@@ -189,9 +213,20 @@ refresh.addEventListener('click', function()
 		
 	}
 	Titanium.App.fireEvent('show_indicator');
+	try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online  && !showerror && !showederror) {
+			showederror = true;
+		alertnoInternet.show();
+		}
+		showerror = !showerror;
 	tableview.setData([]);
 	setTimeout(function()
 	{
+		
 		//alert("setting data");
 		setData();
 	},1000);

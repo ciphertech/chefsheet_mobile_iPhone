@@ -119,6 +119,15 @@ refresh.addEventListener('click', function()
 {
 	Titanium.App.fireEvent('show_indicator');
 	tableview.setData([]);
+	try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online  ) {
+			
+		alertnoInternet.show();
+		}
 	setTimeout(function()
 	{
 		//alert("setting data");
@@ -166,6 +175,15 @@ dialog.addEventListener('click',function(e)
 {
 	
 	if(e.index < 3) {
+		try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online  ) {
+			
+		alertnoInternet.show();
+		}else{
 		win.close();
 		
 		var report = url("/manager/inventories/"+report_id+"/"+report_type[e.index]+".pdf");
@@ -199,6 +217,7 @@ dialog.addEventListener('click',function(e)
         wv.addEventListener('load', function() {
 			Titanium.App.fireEvent('hide_indicator');
 		});	
+		}
 	}
 	
 });

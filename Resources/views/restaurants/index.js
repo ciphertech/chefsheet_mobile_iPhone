@@ -123,10 +123,19 @@ catch(Exce){
   	};
 	xhr.onerror = function(e) {
 		//alert("error");
+			try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online) {
+		alertnoInternet.show();
+		}
 		Ti.API.info("post error:" + e.error);
 	};
 	xhr.open('GET', global_url+"/api/v1/restaurants.json"+token_variable); // Changed 23rd B & Y
 	xhr.send();	
+	
 };
 setData();
 
@@ -290,6 +299,22 @@ function setRestaurant(rid) {
 		Ti.App.fireEvent('refresh', { tab: 'inventories' });
 		
 	}
+	xhr.onerror = function(e) {
+		
+		//alert("error");
+		try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online) {
+		alertnoInternet.show();
+		}
+		win.tabGroup.setActiveTab(1);
+		Ti.App.fireEvent('refresh', { tab: 'inventories' });
+	}
+	
+	
   	xhr.open('GET', global_url+"/api/v1/restaurants/"+rid+"/switch.json"+token_variable); // Changed 23rd B & Y
   	xhr.send();	
 };

@@ -285,6 +285,7 @@ scrollView.addEventListener('click', function(e){
 
 function logout() {
 	var xhr = Titanium.Network.createHTTPClient();
+	signout=true;
 	xhr.onload = function(e) {
 	  
 		Ti.App.Properties.setString('user_pass','');
@@ -297,6 +298,14 @@ function logout() {
 	};
 	xhr.onerror = function(e) {
 		Ti.API.info("get error:" + e.error);
+		try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online ) {
+					alertnoInternet.show();
+		}
 	};
 
 	xhr.open("POST", url('/auth/users/sign_out.json'));

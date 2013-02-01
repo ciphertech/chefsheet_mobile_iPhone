@@ -175,7 +175,52 @@ for(i=0;i<inventory.length;i++) {
 		font:{fontSize:18,fontWeight:'bold'},
 		color:'#fff'
 	});
+	var clickk = true;
+	
+	var unitType =Ti.UI.createButton({
+		title:"Inventory",
+		style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
+		height:25,
+		top:33,
+		//left:180,
+		width:90,
+		right:10,
+		font:{fontSize:18,fontWeight:'bold'},
+		borderRadius : 10,
+		backgroundGradient : {
+			type : 'linear',
+			colors : ['#698aaa', '#1C4E7E', '#173f6b'],
+			startPoint : {
+				x : 0,
+				y : 0
+			},
+			endPoint : {
+				x : 0,
+				y : 36
+			},
+			backFillStart : false
+		},
+		borderWidth : 1,
+		borderColor : '#112f55'
+		
+		//color:'#fff'
+	});
 	view.add(unitLabel);
+	
+	view.add(unitType);
+	
+		unitType.addEventListener('click', function(e) {
+			unitType.title ="Purchase";
+			if(clickk )
+			{unitType.title ="Purchase";
+				
+			}else{
+				unitType.title ="Inventory";
+				
+			}
+			clickk = !clickk;
+		});
+	
 	
 	qtyField.addEventListener('change', function(e) {
 		if(e.value && (scrollView.views[e.source.index].children[4].value || scrollView.views[e.source.index].children[4].hintText !="Par")) {
@@ -223,7 +268,7 @@ scrollView.addEventListener('scroll', function(e)
 {
 	activeView = e.view;  // the object handle to the view that is about to become visible
 
-	 updateInv();
+//31st	 updateInv();
 	i_lst = i;
 	i = e.currentPage;
 
@@ -261,6 +306,7 @@ scrollView.addEventListener('swipe', function(e)
 });
 
 function updateInv() {
+	var showederror = false;
 	var xhr = Titanium.Network.createHTTPClient();
 	xhr.onload = function(e) {
 		//alert("good");
@@ -279,9 +325,15 @@ function updateInv() {
 		//win.setData();
 		
 	};
+
 //yogesh added for testing 	alert(scrollView.views[i].children[3].value + "  "+scrollView.views[i].children[4].value +"  "+scrollView.views[i].children[5].value);
 	if(scrollView.views[i].children[3].value > ''|| scrollView.views[i].children[4].value > '' || scrollView.views[i].children[5].value > ''){
 			xhr.onerror = function(e) {
+				
+		if (!Titanium.Network.online && !showederror) {
+			showederror = true;
+		alertnoInternet.show();
+		}
 				Ti.API.info("post error:" + e.error);
 							};
 			xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));

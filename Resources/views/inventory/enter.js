@@ -24,7 +24,8 @@ if (location_id == null) {
 }
 */
 //alert(product_id);
-var catBG = Titanium.UI.createImageView({
+var catBG = Titanium.UI.create
+View({
     	//image:'../../images/categories/bg'+category_id+'.png',
     	image:cropImage(product_img,340,340,320,240),
 		right:0,
@@ -220,6 +221,7 @@ win.addEventListener('swipe', enterItem);
 invBtn.addEventListener('click', enterItem);
 
 function enterItem() {
+	
 	//alert("productlocation_id:"+location_id);
 	var xhr = Titanium.Network.createHTTPClient();
 	xhr.onload = function(e) {

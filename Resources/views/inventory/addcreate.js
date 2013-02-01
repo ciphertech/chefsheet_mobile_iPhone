@@ -60,7 +60,7 @@ categories = _.groupBy(JSON.parse(Ti.App.Properties.getString('categories')), fu
 Ti.API.info("units.length:" + units.length);
 Ti.API.info("catPickerList.length:" + catPickerList.length);
 		
-rowText('Select a Unit','header','units',0);
+rowText('Purchase Unit','header','units',0);
 for(i=0;i<units.length;i++) {
 	rowText(units[i].name,'','units',units[i].id);
 }
@@ -257,7 +257,17 @@ function addItem() {
 	};
 	xhr.onerror = function(e) {
 		Ti.API.info("post error:" + e.error);
-		alert("Sorry unable to add New Item");
+		try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online) {			
+		alertnoInternet.show();
+		}else{
+		
+		alert("Sorry unable to add New Item");}
+		
 	};
 	// newer method - post directly to inventory
 	xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));

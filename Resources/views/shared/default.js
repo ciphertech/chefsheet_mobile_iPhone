@@ -28,6 +28,22 @@ var menuClosed = Titanium.UI.createAnimation({
 	duration : 250
 });
 
+var alertnoInternet = Ti.UI.createAlertDialog({
+    buttonNames : ["OK"],
+    title : "Cheefsheet",
+    message : "Please check Internet Connection",
+    cancel : 0
+});
+
+
+var alertslowInternet= Ti.UI.createAlertDialog({
+    buttonNames : ["OK"],
+    title : "Cheefsheet",
+    message : "Internet is Slow",
+    cancel : 0
+});
+
+
 require('lib/require_patch').monkeypatch(this);
 var moment = require('lib/moment.min');
 var _ = require('lib/underscore-min')._

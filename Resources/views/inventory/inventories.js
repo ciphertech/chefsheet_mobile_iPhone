@@ -253,6 +253,7 @@ function setData() {
 		}
   	};
 	xhr.onerror = function(e) {
+		
 				Ti.API.info("get error:" + e.error);
 	};
   	//xhr.open('GET', url("/manager/inventories.json?user_id="+user_id));
@@ -528,6 +529,14 @@ refresh.addEventListener('click', function()
 	setTimeout(function()
 	{
 		//alert("setting data");
+		try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online) {
+		alertnoInternet.show();
+		}
 		setData();
 	},1000);
 });
@@ -638,7 +647,14 @@ dialog.addEventListener('click',function(e)
 			setData();
 	  	};
 		xhr.onerror = function(e) {
-			
+		try{
+	Titanium.App.fireEvent('hide_indicator');
+	}catch(e)
+	{	
+	}
+		if (!Titanium.Network.online) {
+		alertnoInternet.show();
+		}
 			Ti.API.info("set error:" + e.error);
 		};
 	  	xhr.open('GET', global_url+"/manager/inventories/"+dupe_id+"/duplicate.json"+token_variable);

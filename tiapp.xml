@@ -8,9 +8,9 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <sdk-version>3.0.0.GA</sdk-version>
-    <id>com.chefsheet.mobile </id>
+    <id>com.mobile.chefsheet</id>
     <name>ChefSheet Mobile</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <publisher>Kiko Taganashi</publisher>
     <url>http://chefsheet.com</url>
     <description>Issues fixed by Cipher Technologies for Iphone </description>
