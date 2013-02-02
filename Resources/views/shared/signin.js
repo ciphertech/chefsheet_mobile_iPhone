@@ -797,7 +797,7 @@ if (os_And) {
 
 
 function eventListenerforSignInBtn() {
-
+alert("It is new build and there is no issue with Testflight");
 	signInBtn.addEventListener('click', function() {
 		error_shown = false;
 		entered=false;

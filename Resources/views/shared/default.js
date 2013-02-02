@@ -207,14 +207,33 @@ function prodImg(obj,size) {
 	var prod_img;
 	img_name = '';
 	if(obj.image_file_name) {
+		alert("I am in 1");
 		prod_img = 'http://s3.amazonaws.com/chefsheet-pro/products/'+obj.id+'/'+size+'/'+obj.image_file_name;
 		img_name = obj.image_file_name;
+		if(img_name == null || prod_img== null){
+			
+			prod_img =	'../../images/default_image2.png';
+		    	img_name ='default_image';
+		   
+		}
+		
 	} else if (obj.category_id != null && obj.category_id != undefined && obj.category_id != '' && categories[obj.category_id] ) {
+		//alert("i am in two");
 		Ti.API.info("obj.category_id: "+obj.category_id);
 		prod_img = 'http://s3.amazonaws.com/chefsheet-pro/categories/'+obj.category_id+'/'+size+'/'+categories[obj.category_id][0].image_file_name;
 		img_name = categories[obj.category_id][0].image_file_name;
+		if(img_name == null || prod_img== null){
+			
+			prod_img =	'../../images/default_image2.png';
+		    	img_name ='default_image';
+		   
+		}
+		
+		
+		
 	} else {
-		return null;
+		prod_img =	'../../images/default_image2.png';
+		    	img_name ='default_image';		
 	}
 	return prod_img;
 }

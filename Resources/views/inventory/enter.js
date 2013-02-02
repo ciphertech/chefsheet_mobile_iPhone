@@ -24,8 +24,7 @@ if (location_id == null) {
 }
 */
 //alert(product_id);
-var catBG = Titanium.UI.create
-View({
+var catBG = Titanium.UI.createImageView({
     	//image:'../../images/categories/bg'+category_id+'.png',
     	image:cropImage(product_img,340,340,320,240),
 		right:0,
@@ -144,6 +143,43 @@ var unitLabel = Ti.UI.createLabel({
 });
 win.add(unitLabel);
 
+	
+	
+	var unitTypeLabel = Ti.UI.createLabel({
+		text:"Select Unit Type -",
+		height:35,
+		top:30,
+		left:60,
+		font:{fontSize:14,fontWeight:'bold'},
+		color:'black'
+	});
+	win.add(unitTypeLabel);
+	
+	var unitName= "Inventory";
+	    var unitType = Titanium.UI.createButton({            
+                left:180,
+                  height:30,
+                  width:100,
+                  top:30,
+                  title:unitName,                           
+               style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED        
+                            
+            });
+ win.add(unitType);
+ var clickedT=true;
+ unitType.addEventListener('click', function(e) {
+ 	
+ 	if(clickedT)
+ 	{
+ 		unitType.title='Purchase';
+ 	}else{
+ 		
+ 		unitType.title='Inventory';
+ 	}
+ 	clickedT = !clickedT;
+ 	
+ });
+  
 qtyField.addEventListener('change', function(e) {
 		if(e.value && (parField.value || parField.hintText !="Par")) {
 			var calc;
@@ -172,7 +208,7 @@ qtyField.addEventListener('change', function(e) {
 	});
 
 var invBtn =  Titanium.UI.createButton({
-	title:'Add',
+	title:'Save',
 	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
 });
 
@@ -182,7 +218,7 @@ var nxtBtn =  Titanium.UI.createButton({
 });
 
 var cancelBtn =  Titanium.UI.createButton({
-	title:'Done',
+	title:'Cancel',
 	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
 });
 
@@ -210,6 +246,8 @@ if (autoFlow == false) {
 	});
 }
 
+
+
 win.add(toolbar);
 // cancel events
 cancelBtn.addEventListener('click', function() {
@@ -235,6 +273,7 @@ function enterItem() {
 	
 	};
 	xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));
+	try{
 	if(product_id>0){
 		xhr.send({
 		//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
@@ -265,6 +304,7 @@ function enterItem() {
 		"inventory[items_attributes][][status]":1
 	});
 	}
+	}catch(e){}
 };
 
 win.addEventListener("open", function(event, type) {

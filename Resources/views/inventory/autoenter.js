@@ -175,53 +175,44 @@ for(i=0;i<inventory.length;i++) {
 		font:{fontSize:18,fontWeight:'bold'},
 		color:'#fff'
 	});
-	var clickk = true;
-	
-	var unitType =Ti.UI.createButton({
-		title:"Inventory",
-		style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
-		height:25,
-		top:33,
-		//left:180,
-		width:90,
-		right:10,
-		font:{fontSize:18,fontWeight:'bold'},
-		borderRadius : 10,
-		backgroundGradient : {
-			type : 'linear',
-			colors : ['#698aaa', '#1C4E7E', '#173f6b'],
-			startPoint : {
-				x : 0,
-				y : 0
-			},
-			endPoint : {
-				x : 0,
-				y : 36
-			},
-			backFillStart : false
-		},
-		borderWidth : 1,
-		borderColor : '#112f55'
-		
-		//color:'#fff'
-	});
 	view.add(unitLabel);
 	
-	view.add(unitType);
+	var unitTypeLabel = Ti.UI.createLabel({
+		text:"Select Unit Type -",
+		height:35,
+		top:30,
+		left:60,
+		font:{fontSize:14,fontWeight:'bold'},
+		color:'black'
+	});
+	view.add(unitTypeLabel);
 	
-		unitType.addEventListener('click', function(e) {
-			unitType.title ="Purchase";
-			if(clickk )
-			{unitType.title ="Purchase";
-				
-			}else{
-				unitType.title ="Inventory";
-				
-			}
-			clickk = !clickk;
-		});
-	
-	
+	var unitName= "Inventory";
+	    var unitType = Titanium.UI.createButton({            
+                left:180,
+                  height:30,
+                  width:100,
+                  top:30,
+                  title:unitName,                           
+               style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED        
+                            
+            });
+ view.add(unitType);
+ var clickedT=true;
+ unitType.addEventListener('click', function(e) {
+ 	
+ 	if(clickedT)
+ 	{
+ 		unitType.title='Purchase';
+ 	}else{
+ 		
+ 		unitType.title='Inventory';
+ 	}
+ 	clickedT = !clickedT;
+ 	
+ });
+ 
+ 
 	qtyField.addEventListener('change', function(e) {
 		if(e.value && (scrollView.views[e.source.index].children[4].value || scrollView.views[e.source.index].children[4].hintText !="Par")) {
 			var calc;
@@ -268,7 +259,7 @@ scrollView.addEventListener('scroll', function(e)
 {
 	activeView = e.view;  // the object handle to the view that is about to become visible
 
-//31st	 updateInv();
+   updateInv();
 	i_lst = i;
 	i = e.currentPage;
 
@@ -306,9 +297,9 @@ scrollView.addEventListener('swipe', function(e)
 });
 
 function updateInv() {
-	var showederror = false;
 	var xhr = Titanium.Network.createHTTPClient();
 	xhr.onload = function(e) {
+	
 		//alert("good");
 		//win.close();
 		/*
@@ -325,21 +316,15 @@ function updateInv() {
 		//win.setData();
 		
 	};
-
 //yogesh added for testing 	alert(scrollView.views[i].children[3].value + "  "+scrollView.views[i].children[4].value +"  "+scrollView.views[i].children[5].value);
-	if(scrollView.views[i].children[3].value > ''|| scrollView.views[i].children[4].value > '' || scrollView.views[i].children[5].value > ''){
+	if(scrollView.views[i].children[3].value !=null || scrollView.views[i].children[4].value !=null || scrollView.views[i].children[5].value !=null){
 			xhr.onerror = function(e) {
-				
-		if (!Titanium.Network.online && !showederror) {
-			showederror = true;
-		alertnoInternet.show();
-		}
 				Ti.API.info("post error:" + e.error);
 							};
 			xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));
 			
-			
-			if(inventory[i].product){
+			//alert(inventory[i].product);
+			if(inventory[i].product != null){
 				xhr.send({
 					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
 					"utf8":"✓",
@@ -495,11 +480,7 @@ var toolbar =  Titanium.UI.iOS.createToolbar({
 	items:[left,flowLbl,right,flexSpace,cancelBtn]
 });
 
-cancelBtn.addEventListener('click', function() {
-	 updateInv();
-	Ti.App.fireEvent('popClose');
-	win.close();
-});
+cancelBtn.addEventListener('click', updateInv2);
 
 /*
 if (Titanium.Platform.osname == 'iphone' || Titanium.Platform.osname == 'ipad')
@@ -560,3 +541,67 @@ win.addEventListener("open", function(event, type) {
 	//Ti.API.info("VIEWS:" + scrollView.views[list_index].children[0].text);
     scrollView.views[list_index].children[3].focus();
 });
+
+function updateInv2() {
+	var xhr = Titanium.Network.createHTTPClient();
+	xhr.onload = function(e) {
+		Ti.App.fireEvent('popClose');
+		win.close();
+		//alert("good");
+		//win.close();
+		/*
+		if (i >= (scrollView.views.length-1)&&(i == i_lst)){
+				Ti.App.fireEvent('popClose');
+				win.close();
+			}				
+			if (i >= (scrollView.views.length-1)){
+				//scrollView.scrollToView(scrollView.views[i]);
+				//scrollView.views[i+1].children[3].focus();
+				completed = true;
+			}
+		*/
+		//win.setData();
+		
+	};
+//yogesh added for testing 	alert(scrollView.views[i].children[3].value + "  "+scrollView.views[i].children[4].value +"  "+scrollView.views[i].children[5].value);
+	if(scrollView.views[i].children[3].value !=null || scrollView.views[i].children[4].value !=null || scrollView.views[i].children[5].value !=null){
+			xhr.onerror = function(e) {
+				Ti.API.info("post error:" + e.error);
+							};
+			xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));
+			
+			//alert(inventory[i].product);
+			if(inventory[i].product != null){
+				xhr.send({
+					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+					"utf8":"✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]":location_id,
+					"inventory[items_attributes][][unit_id]":inventory[i].unitid?inventory[i].unitid:null,
+					"inventory[items_attributes][][quantity]":scrollView.views[i].children[3].value?scrollView.views[i].children[3].value:inventory[i].quantity,
+					"inventory[items_attributes][][par]":scrollView.views[i].children[4].value?scrollView.views[i].children[4].value:inventory[i].par,
+					"inventory[items_attributes][][order]":scrollView.views[i].children[5].value?scrollView.views[i].children[5].value:inventory[i].order,
+					"inventory[items_attributes][][id]":inventory[i].id,
+					"inventory[items_attributes][][product_id]":inventory[i].product_id,
+					"inventory[items_attributes][][_destroy]":0,
+					"inventory[items_attributes][][status]":1
+		
+				});
+			} else {
+					xhr.send({
+					"utf8":"✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]":location_id,
+					"inventory[items_attributes][][unit_id]":inventory[i].unitid?inventory[i].unitid:null,
+					"inventory[items_attributes][][quantity]":scrollView.views[i].children[3].value?scrollView.views[i].children[3].value:inventory[i].quantity,
+					"inventory[items_attributes][][par]":scrollView.views[i].children[4].value?scrollView.views[i].children[4].value:inventory[i].par,
+					"inventory[items_attributes][][order]":scrollView.views[i].children[5].value?scrollView.views[i].children[5].value:inventory[i].order,
+					"inventory[items_attributes][][id]":inventory[i].id,
+					"inventory[items_attributes][][name]":inventory[i].name,
+					"inventory[items_attributes][][_destroy]":0,
+					"inventory[items_attributes][][status]":1
+				});
+			}
+		}
+	}
+

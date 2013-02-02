@@ -186,7 +186,8 @@ dialog.addEventListener('click',function(e)
 		}else{
 		win.close();
 		
-		var report = url("/manager/inventories/"+report_id+"/"+report_type[e.index]+".pdf");
+		var report = url("/manager/inventories/"+report_id+"/"+report_type[e.index]+".pdf");	
+
 		//report = "http://0.0.0.0:3000/manager/inventories/96/order";
 		
 		var wv = Titanium.UI.createWebView({ 

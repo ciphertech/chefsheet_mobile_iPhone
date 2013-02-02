@@ -312,6 +312,7 @@ function setData() {
 
 tvOutstanding.addEventListener('click', function(e)
 {
+	
 	popWin(e,'edit');
 });
 
@@ -391,6 +392,7 @@ win.add(cCountLabel);
 
 tvCompleted.addEventListener('click', function(e) 
 {
+	
 	popWin(e,'edit');
 });
 
