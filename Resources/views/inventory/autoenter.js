@@ -5,6 +5,10 @@ Ti.include('../shared/default.js');
 //var product_unit_id = win.product_unit_id;
 var list_index = win.list_index;
 var inventory = win.inventory;
+var issaved = true;
+
+ 
+ var clickedT=1;
 var location_id = win.location_id;
 var autoFlow = win.autoFlow;
 var completed = false;
@@ -20,6 +24,7 @@ var nxtBtn =  Titanium.UI.createButton({
 
 var cancelBtn =  Titanium.UI.createButton({
 	title:'Done',
+	
 	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
 });
 
@@ -88,8 +93,11 @@ for(i=0;i<inventory.length;i++) {
   		unit = units[inventory[i].unit_id][0].name;
   	}
 	
+
+	
+	
 	var bg = Titanium.UI.createView({
-		top:60,
+		top:35,
 		left:10,
 		right:10,
 		height:55,
@@ -103,7 +111,7 @@ for(i=0;i<inventory.length;i++) {
 		hintText:inventory[i].quantity!=null?inventory[i].quantity:'Count',
 		height:35,
 		width: 100,
-		top:70,
+		top:40,
 		left:60,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		keyboardType:Titanium.UI.KEYBOARD_DECIMAL_PAD,
@@ -116,7 +124,7 @@ for(i=0;i<inventory.length;i++) {
 	  hintText: inventory[i].par !=null?inventory[i].par:'Par',
 	  height:35,
 	  width: 70,
-	  top:130,
+	  top:100,
 	  left:60,
 	  borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	  keyboardType:Titanium.UI.KEYBOARD_DECIMAL_PAD,
@@ -129,7 +137,7 @@ for(i=0;i<inventory.length;i++) {
 	  hintText: inventory[i].order !=null?inventory[i].order:'Order',
 	  height:35,
 	  width: 70,
-	  top:130,
+	  top:100,
 	  right:20,
 	  borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	  keyboardType:Titanium.UI.KEYBOARD_DECIMAL_PAD,
@@ -140,7 +148,7 @@ for(i=0;i<inventory.length;i++) {
 	var parLabel = Ti.UI.createLabel({
 	  text:'Par',
 	  height:35,
-	  top:130,
+	  top:100,
 	  left:20,
 	  font:{fontWeight:'bold'},
 	  color:'#444'
@@ -150,7 +158,7 @@ for(i=0;i<inventory.length;i++) {
 	var orderLabel = Ti.UI.createLabel({
 	  text:'Order',
 	  height:35,
-	  top:130,
+	  top:100,
 	  right:110,
 	  font:{fontWeight:'bold'},
 	  color:'#444'
@@ -160,7 +168,7 @@ for(i=0;i<inventory.length;i++) {
 	var qtyLabel = Ti.UI.createLabel({
 	  text:'Qty',
 	  height:35,
-	  top:70,
+	  top:40,
 	  left:20,
 	  font:{fontSize:18,fontWeight:'bold'},
 	  color:'#fff'
@@ -170,47 +178,23 @@ for(i=0;i<inventory.length;i++) {
 	var unitLabel = Ti.UI.createLabel({
 		text:unit,
 		height:35,
-		top:70,
+		top:40,
 		left:180,
 		font:{fontSize:18,fontWeight:'bold'},
 		color:'#fff'
 	});
 	view.add(unitLabel);
 	
-	var unitTypeLabel = Ti.UI.createLabel({
-		text:"Select Unit Type -",
-		height:35,
-		top:30,
-		left:60,
-		font:{fontSize:14,fontWeight:'bold'},
-		color:'black'
-	});
-	view.add(unitTypeLabel);
 	
-	var unitName= "Inventory";
-	    var unitType = Titanium.UI.createButton({            
-                left:180,
-                  height:30,
-                  width:100,
-                  top:30,
-                  title:unitName,                           
-               style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED        
-                            
-            });
- view.add(unitType);
- var clickedT=true;
- unitType.addEventListener('click', function(e) {
+	
+	
+	
+	
+
+ 
  	
- 	if(clickedT)
- 	{
- 		unitType.title='Purchase';
- 	}else{
- 		
- 		unitType.title='Inventory';
- 	}
- 	clickedT = !clickedT;
- 	
- });
+
+
  
  
 	qtyField.addEventListener('change', function(e) {
@@ -221,7 +205,7 @@ for(i=0;i<inventory.length;i++) {
 			} else {
 				calc = scrollView.views[e.source.index].children[4].value - e.value;
 			}
-			scrollView.views[e.source.index].children[5].hintText = (calc <=0) ? 0:calc;
+			scrollView.views[e.source.index].children[5].value = (calc <=0) ? 0:calc;
 			Titanium.API.info("calc: "+calc);
 		}
 	});
@@ -235,12 +219,14 @@ for(i=0;i<inventory.length;i++) {
 			} else {
 				calc = e.value - scrollView.views[e.source.index].children[3].value;
 			}
-			scrollView.views[e.source.index].children[5].hintText = (calc <=0) ? 0:calc;
+			scrollView.views[e.source.index].children[5].value = (calc <=0) ? 0:calc;
 			Titanium.API.info("calc: "+calc);
 		}
 	});
 	views.push(view);
-}
+}//end of for
+
+ 
 
 var scrollView = Titanium.UI.createScrollableView({
 	views:views,
@@ -260,6 +246,8 @@ scrollView.addEventListener('scroll', function(e)
 	activeView = e.view;  // the object handle to the view that is about to become visible
 
    updateInv();
+   clickedT=1;
+	unitType.title="Purchase";
 	i_lst = i;
 	i = e.currentPage;
 
@@ -269,6 +257,7 @@ scrollView.addEventListener('scroll', function(e)
 
 	if (i >= (scrollView.views.length)&&(i == i_lst)){    //scrollView.views.length-1  before changed to scrollView.views.length by yogesh
 				updateInv();
+				
 				Ti.App.fireEvent('popClose');
 				win.close();
 	}				
@@ -296,67 +285,6 @@ scrollView.addEventListener('swipe', function(e)
 	}
 });
 
-function updateInv() {
-	var xhr = Titanium.Network.createHTTPClient();
-	xhr.onload = function(e) {
-	
-		//alert("good");
-		//win.close();
-		/*
-		if (i >= (scrollView.views.length-1)&&(i == i_lst)){
-				Ti.App.fireEvent('popClose');
-				win.close();
-			}				
-			if (i >= (scrollView.views.length-1)){
-				//scrollView.scrollToView(scrollView.views[i]);
-				//scrollView.views[i+1].children[3].focus();
-				completed = true;
-			}
-		*/
-		//win.setData();
-		
-	};
-//yogesh added for testing 	alert(scrollView.views[i].children[3].value + "  "+scrollView.views[i].children[4].value +"  "+scrollView.views[i].children[5].value);
-	if(scrollView.views[i].children[3].value !=null || scrollView.views[i].children[4].value !=null || scrollView.views[i].children[5].value !=null){
-			xhr.onerror = function(e) {
-				Ti.API.info("post error:" + e.error);
-							};
-			xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));
-			
-			//alert(inventory[i].product);
-			if(inventory[i].product != null){
-				xhr.send({
-					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
-					"utf8":"✓",
-					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-					"inventory[items_attributes][][location_id]":location_id,
-					"inventory[items_attributes][][unit_id]":inventory[i].unitid?inventory[i].unitid:null,
-					"inventory[items_attributes][][quantity]":scrollView.views[i].children[3].value?scrollView.views[i].children[3].value:inventory[i].quantity,
-					"inventory[items_attributes][][par]":scrollView.views[i].children[4].value?scrollView.views[i].children[4].value:inventory[i].par,
-					"inventory[items_attributes][][order]":scrollView.views[i].children[5].value?scrollView.views[i].children[5].value:inventory[i].order,
-					"inventory[items_attributes][][id]":inventory[i].id,
-					"inventory[items_attributes][][product_id]":inventory[i].product_id,
-					"inventory[items_attributes][][_destroy]":0,
-					"inventory[items_attributes][][status]":1
-		
-				});
-			} else {
-					xhr.send({
-					"utf8":"✓",
-					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-					"inventory[items_attributes][][location_id]":location_id,
-					"inventory[items_attributes][][unit_id]":inventory[i].unitid?inventory[i].unitid:null,
-					"inventory[items_attributes][][quantity]":scrollView.views[i].children[3].value?scrollView.views[i].children[3].value:inventory[i].quantity,
-					"inventory[items_attributes][][par]":scrollView.views[i].children[4].value?scrollView.views[i].children[4].value:inventory[i].par,
-					"inventory[items_attributes][][order]":scrollView.views[i].children[5].value?scrollView.views[i].children[5].value:inventory[i].order,
-					"inventory[items_attributes][][id]":inventory[i].id,
-					"inventory[items_attributes][][name]":inventory[i].name,
-					"inventory[items_attributes][][_destroy]":0,
-					"inventory[items_attributes][][status]":1
-				});
-			}
-		}
-	}
 
 scrollView.addEventListener('scrollEnd', function()
 {
@@ -441,6 +369,8 @@ var left = Titanium.UI.createButton({
 });
 left.addEventListener('click', function(e)
 {
+	clickedT=1;
+	unitType.title="Purchase";
 	updateInv();
 	if (i === 0){ // alert("Item's  Updated");  //added by yogesh 
 	return; }
@@ -453,15 +383,15 @@ var right = Titanium.UI.createButton({
 	image:'../../images/21-circle-east.png'
 });
 right.addEventListener('click', function(e)
-{
-	 updateInv();
+{clickedT=1;
+	unitType.title="Purchase";
+	 
 	if (i === (scrollView.views.length-1)){ 
 	//	alert("Item's  Updated");  //added by yogesh
-	// closed by yogesh	Ti.App.fireEvent('popClose');
-		
-	// closed by yogesh	win.close();
-		
+	updateInv2();
 		return; 
+	}else{
+		updateInv();
 	}
 	//i++;
 	scrollView.scrollToView(scrollView.views[i+1]);
@@ -480,62 +410,36 @@ var toolbar =  Titanium.UI.iOS.createToolbar({
 	items:[left,flowLbl,right,flexSpace,cancelBtn]
 });
 
+var unitTypeLabel = Ti.UI.createLabel({
+		text:"Select Unit Type -",
+		height:35,
+		left:30
+		
+				
+	});
+var unitType = Titanium.UI.createButton({            
+        left:100,
+        height:33,
+        width:140,      
+        title:"Purchase",                           
+        style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED                                    
+    });
+
+var toolbar2 =  Titanium.UI.iOS.createToolbar({
+	barColor: '#1C4E7E',
+	bottom:40,
+	items:[unitTypeLabel,unitType]
+});
+
+win.add(toolbar2);
 cancelBtn.addEventListener('click', updateInv2);
 
-/*
-if (Titanium.Platform.osname == 'iphone' || Titanium.Platform.osname == 'ipad')
-{
-	// set toolbar
-	win.setToolbar([flexSpace,left,change,add,jump,right,flexSpace]);
-}
-else
-{
-	var toolbar = Titanium.UI.createView({
-		bottom: 10,
-		height: 50,
-		backgroundColor: '#333333',
-		borderRadius: 10,
-		opacity: 0.3,
-		left: 10,
-		right: 10
-	});
+//bidyut nath
+//call method to save count on button title change
 
-	var floater = Titanium.UI.createView({
-		left:10,
-		right:10,
-		height: 'auto',
-		opacity: 0
-	});
 
-	toolbar.add(floater);
 
-	left.left = 10;
-	left.width = 30;
-
-	change.left = 50;
-	change.width = 70;
-	change.height = 35;
-
-	add.left = 130;
-	add.width = 70;
-	add.height = 35;
-
-	jump.left = 210;
-	jump.width = 70;
-	jump.height = 35;
-
-	right.right = 10;
-	right.width = 30;
-
-	floater.add(left);
-	floater.add(change);
-	floater.add(add);
-	floater.add(jump);
-	floater.add(right);
-	*/
-	win.add(toolbar);
-//}
-
+win.add(toolbar);
 win.addEventListener("open", function(event, type) {
 	scrollView.currentPage=list_index;
 	//Ti.API.info("VIEWS:" + scrollView.views[list_index].children[0].text);
@@ -543,27 +447,32 @@ win.addEventListener("open", function(event, type) {
 });
 
 function updateInv2() {
+	try{
+	Titanium.App.fireEvent('hide_indicator_auto');
+	}catch(e)
+	{
+		
+	}
+	cancelBtn.enabled=false;
+	unitType.enabled=false;
+	Titanium.App.fireEvent('show_indicator_auto');
 	var xhr = Titanium.Network.createHTTPClient();
 	xhr.onload = function(e) {
+		try{
+	Titanium.App.fireEvent('hide_indicator_auto');
+	}catch(e)
+	{
+		
+	}
+	cancelBtn.enabled=true;
+	unitType.enabled=true;
 		Ti.App.fireEvent('popClose');
 		win.close();
-		//alert("good");
-		//win.close();
-		/*
-		if (i >= (scrollView.views.length-1)&&(i == i_lst)){
-				Ti.App.fireEvent('popClose');
-				win.close();
-			}				
-			if (i >= (scrollView.views.length-1)){
-				//scrollView.scrollToView(scrollView.views[i]);
-				//scrollView.views[i+1].children[3].focus();
-				completed = true;
-			}
-		*/
-		//win.setData();
+		
 		
 	};
-//yogesh added for testing 	alert(scrollView.views[i].children[3].value + "  "+scrollView.views[i].children[4].value +"  "+scrollView.views[i].children[5].value);
+
+ 
 	if(scrollView.views[i].children[3].value !=null || scrollView.views[i].children[4].value !=null || scrollView.views[i].children[5].value !=null){
 			xhr.onerror = function(e) {
 				Ti.API.info("post error:" + e.error);
@@ -571,37 +480,427 @@ function updateInv2() {
 			xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));
 			
 			//alert(inventory[i].product);
-			if(inventory[i].product != null){
+			
+			// for recipe count
+			try{
+				if (unitType.title == 'Recipe') {
+					if (inventory[i].product != null) {
+						xhr.send({
+							//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+							"utf8" : "✓",
+							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+							"inventory[items_attributes][][location_id]" : location_id,
+							"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
+							"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+							"inventory[items_attributes][][id]" : inventory[i].id,
+							"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+							"inventory[items_attributes][][_destroy]" : 0,
+							"inventory[items_attributes][][status]" : 1
+
+						});
+					} else {
+						xhr.send({
+							"utf8" : "✓",
+							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+							"inventory[items_attributes][][location_id]" : location_id,
+							"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
+							"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+							"inventory[items_attributes][][id]" : inventory[i].id,
+							"inventory[items_attributes][][name]" : inventory[i].name,
+							"inventory[items_attributes][][_destroy]" : 0,
+							"inventory[items_attributes][][status]" : 1
+						});
+					}
+				}
+                }catch(e){}
+			
+			// for inventory count
+			try{
+				if (unitType.title == 'Inventory') {
+					if (inventory[i].product != null) {
+						xhr.send({
+							//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+							"utf8" : "✓",
+							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+							"inventory[items_attributes][][location_id]" : location_id,
+							"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
+							"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+							"inventory[items_attributes][][id]" : inventory[i].id,
+							"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+							"inventory[items_attributes][][_destroy]" : 0,
+							"inventory[items_attributes][][status]" : 1
+
+						});
+					} else {
+						xhr.send({
+							"utf8" : "✓",
+							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+							"inventory[items_attributes][][location_id]" : location_id,
+							"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
+							"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+							"inventory[items_attributes][][id]" : inventory[i].id,
+							"inventory[items_attributes][][name]" : inventory[i].name,
+							"inventory[items_attributes][][_destroy]" : 0,
+							"inventory[items_attributes][][status]" : 1
+						});
+					}
+				}
+                }catch(e){}
+			
+			
+			// for purchase count
+			try{
+				if (unitType.title == 'Purchase') {
+					if (inventory[i].product != null) {
+						xhr.send({
+							//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+							"utf8" : "✓",
+							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+							"inventory[items_attributes][][location_id]" : location_id,
+							"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
+							"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+							"inventory[items_attributes][][id]" : inventory[i].id,
+							"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+							"inventory[items_attributes][][_destroy]" : 0,
+							"inventory[items_attributes][][status]" : 1
+
+						});
+					} else {
+						xhr.send({
+							"utf8" : "✓",
+							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+							"inventory[items_attributes][][location_id]" : location_id,
+							"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
+							"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+							"inventory[items_attributes][][id]" : inventory[i].id,
+							"inventory[items_attributes][][name]" : inventory[i].name,
+							"inventory[items_attributes][][_destroy]" : 0,
+							"inventory[items_attributes][][status]" : 1
+						});
+					}
+				}
+                }catch(e){}
+			
+			
+			
+		}
+		setTimeout(function()
+	{
+		cancelBtn.enabled=true;
+	unitType.enabled=true;
+	alert("Please check internet connection");
+	Ti.App.fireEvent('popClose');
+		win.close();
+	},25000);
+	}
+
+
+
+
+function updateInv() {
+	var xhr = Titanium.Network.createHTTPClient();
+
+xhr.onload = function(e) {
+
+};
+
+if (scrollView.views[i].children[3].value != null || scrollView.views[i].children[4].value != null || scrollView.views[i].children[5].value != null) {
+	xhr.onerror = function(e) {
+		Ti.API.info("post error:" + e.error);
+	};
+	xhr.open("PUT", url('/manager/inventories/' + Ti.App.Properties.getString('inventory_id') + '.json'));
+
+	//alert(inventory[i].product);
+
+	// for recipe count
+	try {
+		if (unitType.title == 'Recipe') {
+			if (inventory[i].product != null) {
 				xhr.send({
 					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
-					"utf8":"✓",
+					"utf8" : "✓",
 					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-					"inventory[items_attributes][][location_id]":location_id,
-					"inventory[items_attributes][][unit_id]":inventory[i].unitid?inventory[i].unitid:null,
-					"inventory[items_attributes][][quantity]":scrollView.views[i].children[3].value?scrollView.views[i].children[3].value:inventory[i].quantity,
-					"inventory[items_attributes][][par]":scrollView.views[i].children[4].value?scrollView.views[i].children[4].value:inventory[i].par,
-					"inventory[items_attributes][][order]":scrollView.views[i].children[5].value?scrollView.views[i].children[5].value:inventory[i].order,
-					"inventory[items_attributes][][id]":inventory[i].id,
-					"inventory[items_attributes][][product_id]":inventory[i].product_id,
-					"inventory[items_attributes][][_destroy]":0,
-					"inventory[items_attributes][][status]":1
-		
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
+					"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+
 				});
 			} else {
-					xhr.send({
-					"utf8":"✓",
+				xhr.send({
+					"utf8" : "✓",
 					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-					"inventory[items_attributes][][location_id]":location_id,
-					"inventory[items_attributes][][unit_id]":inventory[i].unitid?inventory[i].unitid:null,
-					"inventory[items_attributes][][quantity]":scrollView.views[i].children[3].value?scrollView.views[i].children[3].value:inventory[i].quantity,
-					"inventory[items_attributes][][par]":scrollView.views[i].children[4].value?scrollView.views[i].children[4].value:inventory[i].par,
-					"inventory[items_attributes][][order]":scrollView.views[i].children[5].value?scrollView.views[i].children[5].value:inventory[i].order,
-					"inventory[items_attributes][][id]":inventory[i].id,
-					"inventory[items_attributes][][name]":inventory[i].name,
-					"inventory[items_attributes][][_destroy]":0,
-					"inventory[items_attributes][][status]":1
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
+					"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][name]" : inventory[i].name,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
 				});
 			}
 		}
+	} catch(e) {
 	}
+
+	// for inventory count
+	try {
+		if (unitType.title == 'Inventory') {
+			if (inventory[i].product != null) {
+				xhr.send({
+					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
+					"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+
+				});
+			} else {
+				xhr.send({
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
+					"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][name]" : inventory[i].name,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+				});
+			}
+		}
+	} catch(e) {
+	}
+
+	// for purchase count
+	try {
+		if (unitType.title == 'Purchase') {
+			if (inventory[i].product != null) {
+				xhr.send({
+					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
+					"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+
+				});
+			} else {
+				xhr.send({
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
+					"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][name]" : inventory[i].name,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+				});
+			}
+		}
+	} catch(e) {
+	}
+
+}
+
+setTimeout(function() {
+
+}, 10000);
+}
+
+//Bidyut Nath
+// this method will save count when unitType button title gets changed.
+
+unitType.addEventListener('click', function() {
+
+	updateInv();
+	if (clickedT == 1) {
+
+		clickedT = 2;
+
+		/*alert("Itemname000=="+scrollView.views[i].children[0].text);
+		 alert("Itemname111=="+scrollView.views[i].children[1].text);
+		 alert("Itemname222=="+scrollView.views[i].children[2].text);
+		 alert("Itemname333=="+scrollView.views[i].children[3].value);
+		 alert("Itemname444=="+scrollView.views[i].children[4].value);
+		 alert("Itemname555=="+scrollView.views[i].children[5].text);
+		 alert("Itemname666=="+scrollView.views[i].children[6].text);
+		 alert("Itemname777=="+scrollView.views[i].children[7].text);
+		 alert("Itemname888=="+scrollView.views[i].children[8].text);
+		 alert("Itemname999=="+scrollView.views[i].children[9].text);*/
+
+		try {
+
+			scrollView.views[i].children[9].text = units[inventory[i].inventory_unit_id][0].name === null ? 'Qty' : units[inventory[i].inventory_unit_id][0].name;
+			//unitLabel
+			scrollView.views[i].children[3].value = inventory[i].inventory_unit_qty === null ? 'Count' : inventory[i].inventory_unit_qty;
+			unitType.title = "Inventory";
+			//QuanityTextBox
+			//	alert(unit = units[inventory[i].unit_id][0].name);
+		} catch(ex) {
+			clickedT = 3;
+			try {
+
+				scrollView.views[i].children[9].text = units[inventory[i].recipe_unit_id][0].name === null ? 'Qty' : units[inventory[i].recipe_unit_id][0].name;
+				if (inventory[i].recipe_unit_qty !== null) {
+					scrollView.views[i].children[3].value = inventory[i].recipe_unit_qty;
+				}
+
+				unitType.title = "Recipe";
+
+			} catch(ex) {
+				unitType.title = "Purchase";
+				clickedT = 1;
+			}
+		}
+
+	} else if (clickedT == 2) {
+		clickedT = 3;
+
+		try {
+
+			scrollView.views[i].children[9].text = units[inventory[i].recipe_unit_id][0].name === null ? 'Qty' : units[inventory[i].recipe_unit_id][0].name;
+			if (inventory[i].recipe_unit_qty !== null) {
+				scrollView.views[i].children[3].value = inventory[i].recipe_unit_qty;
+			}
+
+			unitType.title = "Recipe";
+
+		} catch(ex) {
+			unitType.title = "Purchase";
+			clickedT = 1;
+		}
+	} else {
+		clickedT = 1;
+
+		try {
+
+			scrollView.views[i].children[9].text = units[inventory[i].unit_id][0].name === null ? 'Qty' : units[inventory[i].unit_id][0].name;
+			if (inventory[i].quantity !== null) {
+				scrollView.views[i].children[3].value = inventory[i].quantity;
+			}
+
+			unitType.title = "Purchase";
+			//	alert(unit = units[inventory[i].recipe_unit_id][0].name);
+		} catch(ex) {
+
+		}
+	}
+});
+
+//Indicatorrrrrrrrrrrrrrrrrrrrrrrrr
+var indWin = null;
+var actInd = null;
+function showIndicatorauto() {
+	if (!is_android) {
+		// window container
+		indWin = Titanium.UI.createWindow({
+			height : 120,
+			width : 120
+		});
+
+		// black view
+		var indView = Titanium.UI.createView({
+			height : 120,
+			width : 120,
+			backgroundColor : '#000',
+			borderRadius : 12,
+			opacity : 0.7
+		});
+		indWin.add(indView);
+
+		// loading indicator
+		actInd = Titanium.UI.createActivityIndicator({
+			style : Titanium.UI.iPhone.ActivityIndicatorStyle.BIG,
+			height : 30,
+			width : 30
+		});
+	}// brace took down 23rd B & Y
+	if (!is_android) {
+		indWin.add(actInd);
+
+		// message
+		var message = Titanium.UI.createLabel({
+			text : 'Loading',
+			color : '#fff',
+			width : 'auto',
+			height : 'auto',
+			font : {
+				fontSize : 20,
+				fontWeight : 'bold'
+			},
+			bottom : 20
+		});
+		indWin.add(message);
+		indWin.open();
+
+		actInd.show();
+
+		setTimeout(function() {
+			hideIndicatorauto();
+		}, 25000);
+	}
+}
+
+function hideIndicatorauto() {
+	if (!is_android) {
+		if (indWin) {
+
+			indWin.close({
+				opacity : 0,
+				duration : 500
+			});
+
+		}
+	}
+}
+
+//
+// Add global event handlers to hide/show custom indicator
+//
+Titanium.App.addEventListener('show_indicator_auto', function(e) {
+	Ti.API.info("IN SHOW INDICATOR");
+	showIndicatorauto();
+});
+Titanium.App.addEventListener('hide_indicator_auto', function(e) {
+	Ti.API.info("IN HIDE INDICATOR");
+	hideIndicatorauto();
+});
 

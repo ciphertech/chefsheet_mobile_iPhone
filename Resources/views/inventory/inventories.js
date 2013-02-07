@@ -4,14 +4,11 @@ var refresh = Titanium.UI.createButton({
 });
 var restaurant_name = '';
 
-
-
 var data = [];
 
 bgFrame(12,10,12,17);
 //Titanium.App.fireEvent('show_indicator');
 
-if(!os_And){
 var idLabel = Ti.UI.createLabel({
   text:Ti.App.Properties.getString('restaurant_name')+' Inventories',
   top:20,
@@ -19,54 +16,6 @@ var idLabel = Ti.UI.createLabel({
   height:'auto',
   color:'#357'
 });
-}
-else{
-	//if screen is HVGA
-		if ((width == '320') && (height == '480')) {
-			var idLabel = Ti.UI.createLabel({
-				text : Ti.App.Properties.getString('restaurant_name') + ' Inventories',
-				top : 20,
-				left : 20,
-				height : 'auto',
-				color : '#357'
-			});
-		}
-		
-		//if screen is WQVGA400
-	if ((width == 240) && (height == 400)) {
-		var idLabel = Ti.UI.createLabel({
-				text : Ti.App.Properties.getString('restaurant_name') + ' Inventories',
-				font:{fontWeight:'normal',fontSize:12},
-				top : 20,
-				left : 20,
-				height : 'auto',
-				color : '#357'
-			});
-	}
-			//if screen is WQVGA432	
-	if ((width == 240) && (height == 432)) {
-		var idLabel = Ti.UI.createLabel({
-				text : Ti.App.Properties.getString('restaurant_name') + ' Inventories',
-				font:{fontWeight:'normal',fontSize:12},
-				top : 20,
-				left : 20,
-				height : 'auto',
-				color : '#357'
-			});
-	}
-			//if screen is QVGA
-	if ((width == 240) && (height == 320)) {
-		var idLabel = Ti.UI.createLabel({
-				text : Ti.App.Properties.getString('restaurant_name') + ' Inventories',
-				font:{fontWeight:'normal',fontSize:12},
-				top : 20,
-				left : 20,
-				height : 'auto',
-				color : '#357'
-			});
-	}
-	
-}
 win.add(idLabel);
 /*
 var lblFrame = Ti.UI.createView({
@@ -90,18 +39,6 @@ var bttnLbl = Ti.UI.createLabel({
   shadowColor:'#89a', 
   shadowOffset:{x:2,y:2}
 });
-if (os_And){
-var bttnLbl = Ti.UI.createLabel({
-  text:'Duplicate',
-  font:{fontWeight:'normal',fontSize:10},
-  top:50,
-  left:20,
-  height:'auto',
-  color:'black',
-  shadowColor:'#89a', 
-  shadowOffset:{x:2,y:2}
-});
-}
 win.add(bttnLbl);
 /*
 var addBttn = Titanium.UI.createButton({
@@ -160,14 +97,8 @@ function setData() {
 	var xhr = Ti.Network.createHTTPClient();
   	xhr.onload = function(e) {
 		var items = JSON.parse(this.responseText);
-		try{
-	Titanium.App.fireEvent('hide_indicator');
-	}catch(e)
-	{
-		
-	}
 		if(items.length ==0 ){
-			
+			Titanium.App.fireEvent('hide_indicator');
 			bttnLbl.visible = false;
 			tableview.visible = false;
 			//tvBg.visible = false;
@@ -213,7 +144,6 @@ function setData() {
 				inv_id:items[i].id
 			});
 				
-			if(!os_And){	
 			var invLabel = Titanium.UI.createLabel({
 				text:invTitle,
 				font:{fontWeight:'bold',fontSize:(invTitle.length>=26)?12:16},
@@ -222,19 +152,6 @@ function setData() {
 				left:44,
 				top:3
 			});
-			}
-			else{			
-			var invLabel = Titanium.UI.createLabel({
-				text:invTitle,
-				font:{fontWeight:'bold',fontSize:(invTitle.length>=26)?12:16},
-				//width:'65%',
-				textAlign:'left',
-				left:44,
-				top:2,
-				color:'#112f55'  //changed by bidyut from #357 
-			});
-			}
-			
 			row = Ti.UI.createTableViewRow({
 				//indentionLevel:3,
 				//title:String(invTitle),
@@ -253,15 +170,15 @@ function setData() {
 		}
   	};
 	xhr.onerror = function(e) {
-		
-				Ti.API.info("get error:" + e.error);
+	
+		Ti.API.info("get error:" + e.error);
 	};
   	//xhr.open('GET', url("/manager/inventories.json?user_id="+user_id));
-  	xhr.open('GET', global_url+"/api/v1/inventories.json"+token_variable);
+  	xhr.open('GET', url("/api/v1/inventories.json"));
   	xhr.send();	
 };
 setData();
-if(!os_And){
+
 var tvBg = Ti.UI.createImageView({
 	bottom:24,
 	left:19,
@@ -273,21 +190,12 @@ var tvBg = Ti.UI.createImageView({
 	backgroundImage:'../../images/tableBG.png'
 });
 win.add(tvBg);
-}
+
 var noInvLbl = Titanium.UI.createLabel({
 	top:180,
 	text:'No Inventories Present',
 	visible:false
 });
-
-if(os_And){
-	var noInvLbl = Titanium.UI.createLabel({
-	top:180,
-	text:'No Inventories Present',
-	color:'black',
-	visible:false
-});
-}
 
 var openBtn = Ti.UI.createButton({
 	title:'Create one at ChefSheet.com',
@@ -306,75 +214,6 @@ var openBtn = Ti.UI.createButton({
 	borderColor:'#112f55',
 	visible:false
 });
-
-if(os_And){
-	//if screen is HVGA
-	if ((width == '320') && (height == '480')) {
-       var openBtn = Ti.UI.createButton({
-	       title:'Create one at ChefSheet.com',
-	       top:210,
-	       width:260,
-	       height:36,
-	       style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
-	       borderRadius:10,
-	       font:{fontSize:16,fontWeight:'bold'},
-	       backgroundGradient:{type:'linear',
-	       colors:['#698aaa','#1C4E7E','#173f6b'],
-	       startPoint:{x:0,y:0},
-	       endPoint:{x:0,y:36},
-	       backFillStart:false},
-	       borderWidth:1,
-	       borderColor:'#112f55',
-	       visible:false
-       });
-}
-
-	//if screen is WQVGA400
-	if ((width == 240) && (height == 400)) {
-       var openBtn = Ti.UI.createButton({
-	       title:'Create one at ChefSheet.com',
-	       top:210,
-	       width:200,
-	       height:36,
-	       style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
-	       borderRadius:10,
-	       font:{fontSize:12,fontWeight:'bold'},
-	       backgroundGradient:{type:'linear',
-	       colors:['#698aaa','#1C4E7E','#173f6b'],
-	       startPoint:{x:0,y:0},
-	       endPoint:{x:0,y:36},
-	       backFillStart:false},
-	       borderWidth:1,
-	       borderColor:'#112f55',
-	       visible:false
-       });
-}
-
-    //if screen is WQVGA432
-	if ((width == 240) && (height == 432)) {
-       var openBtn = Ti.UI.createButton({
-	       title:'Create one at ChefSheet.com',
-	       top:210,
-	       width:200,
-	       height:36,
-	       style:Titanium.UI.iPhone.SystemButtonStyle.PLAIN,
-	       borderRadius:10,
-	       font:{fontSize:12,fontWeight:'bold'},
-	       backgroundGradient:{type:'linear',
-	       colors:['#698aaa','#1C4E7E','#173f6b'],
-	       startPoint:{x:0,y:0},
-	       endPoint:{x:0,y:36},
-	       backFillStart:false},
-	       borderWidth:1,
-	       borderColor:'#112f55',
-	       visible:false
-       });
-}
-
-
-}
-
-
 win.add(noInvLbl);
 win.add(openBtn);
 
@@ -382,7 +221,6 @@ openBtn.addEventListener('click', function() {
   Titanium.Platform.openURL('http://chefsheet.com/manager/inventories');
 });
 
-if(!os_And){
 var tableview = Titanium.UI.createTableView({
 	bottom:26,
 	left:20,
@@ -394,70 +232,7 @@ var tableview = Titanium.UI.createTableView({
 	borderColor:'#999',
 	separatorColor:'#aaa'
 });
-}
-else{
 
-	//if screen is HVGA
-	if ((width == '320') && (height == '480')) {
-		var tableview = Titanium.UI.createTableView({
-			bottom : 26,
-			left : 20,
-			right : 20,
-			height : 275,
-			borderWidth : 1,
-			borderRadius : 8,
-			backgroundColor : 'transparent',
-			borderColor : '#999',
-			separatorColor : '#aaa'
-		});
-	}
-	//if screen is WQVGA400
-	if ((width == 240) && (height == 400)) {
-	var tableview = Titanium.UI.createTableView({
-			bottom : 26,
-			left : 20,
-			right : 20,
-			height : 225,
-			borderWidth : 1,
-			borderRadius : 8,
-			backgroundColor : 'transparent',
-			borderColor : '#999',
-			separatorColor : '#aaa'
-		});
-	}
-	//if screen is WQVGA432
-	
-	if ((width == 240) && (height == 432)) {
-		var tableview = Titanium.UI.createTableView({
-			bottom : 26,
-			left : 20,
-			right : 20,
-			height : 250,
-			borderWidth : 1,
-			borderRadius : 8,
-			backgroundColor : 'transparent',
-			borderColor : '#999',
-			separatorColor : '#aaa'
-		});
-	}
-	
-	//if screen is QVGA
-	if ((width == 240) && (height == 320)) {		
-		var tableview = Titanium.UI.createTableView({
-			bottom : 26,
-			left : 20,
-			right : 20,
-			height : 146,
-			borderWidth : 1,
-			borderRadius : 8,
-			backgroundColor : 'transparent',
-			borderColor : '#999',
-			separatorColor : '#aaa'
-		});
-	}
-	
-
-}
 // create table view event listener
 var dupe_id = -1;
 tableview.addEventListener('click', function(e) {
@@ -493,6 +268,7 @@ tableview.addEventListener('click', function(e) {
 			// reset checks
 			for (var i=0;i<section.rows.length;i++)
 			{
+			
 				section.rows[i].hasDetail = false;
 				section.rows[i].color = '#000';
 				section.rows[i].children[0].color = '#000';
@@ -518,91 +294,27 @@ win.add(tableview);
 
 refresh.addEventListener('click', function()
 {
-	try{
-	Titanium.App.fireEvent('hide_indicator');
-	}catch(e)
-	{
-		
-	}
 	Titanium.App.fireEvent('show_indicator');
 	tableview.setData([]);
 	setTimeout(function()
 	{
 		//alert("setting data");
-		try{
-	Titanium.App.fireEvent('hide_indicator');
-	}catch(e)
-	{	
-	}
-		if (!Titanium.Network.online) {
-		alertnoInternet.show();
-		}
 		setData();
 	},1000);
 });
 
-if (!os_And) {
+if (Ti.Platform.name == 'iPhone OS') {
 	win.rightNavButton = refresh;
 } else {
-	//if screen is HVGA
-	if ((width == '320') && (height == '480')) {
-		refresh.right = 10;
-		refresh.top = 10;
-		refresh.title = "Refresh";
-		refresh.width = 55;
-		refresh.height = 30;
-		refresh.font = {fontWeight:'normal',fontSize:11},
-		//not working 23rd B&Y tv.top = 60;
-		win.add(refresh);
-	}
-
-	//if screen is WQVGA400
-	if ((width == 240) && (height == 400)) {
-		refresh.right = 15;
-		refresh.top = 18;
-		refresh.title = "Refresh";
-		refresh.width = 55;
-		refresh.font = {fontWeight:'normal',fontSize:11},
-		refresh.height = 30;
-		//not working 23rd B&Y tv.top = 60;
-		win.add(refresh);
-	}
-	
-	//if screen is WQVGA432
-	if ((width == 240) && (height == 432)) {
-		refresh.right = 15;
-		refresh.top = 18;
-		refresh.title = "Refresh";
-		refresh.width = 55;
-		refresh.font = {fontWeight:'normal',fontSize:11},
-		refresh.height = 30;
-		//not working 23rd B&Y tv.top = 60;
-		win.add(refresh);
-	}
-	
-		//if screen is QVGA
-	if ((width == 240) && (height == 320)) {
-		refresh.right = 15;
-		refresh.top = 18;
-		refresh.title = "Refresh";
-		refresh.width = 55;
-		refresh.font = {fontWeight:'normal',fontSize:11},
-		refresh.height = 30;
-		//not working 23rd B&Y tv.top = 60;
-		win.add(refresh);
-	}
-
-
+	refresh.top = 5;
+	refresh.title = "Refresh";
+	refresh.width = 200;
+	tv.top = 60;
+	win.add(refresh);
 }
 
 win.addEventListener("focus", function(event, type) {
 	if (Ti.App.Properties.getString('restaurant_name') != restaurant_name) {
-		try{
-	Titanium.App.fireEvent('hide_indicator');
-	}catch(e)
-	{
-		
-	}
 		Titanium.App.fireEvent('show_indicator');
 		setData();
 		restaurant_name = Ti.App.Properties.getString('restaurant_name');
@@ -615,12 +327,6 @@ Ti.App.addEventListener('refresh', function (e) {
 		Ti.API.info("force refresh inventories");
 		setData();
 		if (Ti.App.Properties.getString('restaurant_name') != restaurant_name) {
-			try{
-	Titanium.App.fireEvent('hide_indicator');
-	}catch(e)
-	{
-		
-	}
 			Titanium.App.fireEvent('show_indicator');
 			restaurant_name = Ti.App.Properties.getString('restaurant_name');
 		}
@@ -647,17 +353,10 @@ dialog.addEventListener('click',function(e)
 			setData();
 	  	};
 		xhr.onerror = function(e) {
-		try{
-	Titanium.App.fireEvent('hide_indicator');
-	}catch(e)
-	{	
-	}
-		if (!Titanium.Network.online) {
-		alertnoInternet.show();
-		}
+			
 			Ti.API.info("set error:" + e.error);
 		};
-	  	xhr.open('GET', global_url+"/manager/inventories/"+dupe_id+"/duplicate.json"+token_variable);
+	  	xhr.open('GET', url("/manager/inventories/"+dupe_id+"/duplicate.json"));
 	  	xhr.send();
 	};
 	

@@ -80,7 +80,7 @@ if (!os_And) {
 	win.add(autoLogSwitch);
 
 	var emailField = Ti.UI.createTextField({
-		hintText : 'email',
+		hintText : 'Email',
 		height : 35,
 		width : 300,
 		top : 90,
@@ -93,7 +93,7 @@ if (!os_And) {
 	win.add(emailField);
 
 	var passwordField = Ti.UI.createTextField({
-		hintText : 'password',
+		hintText : 'Password',
 		passwordMask : true,
 		height : 35,
 		width : 300,
@@ -579,7 +579,7 @@ if (os_And) {
 		win.add(emailField);
 
 		var passwordField = Ti.UI.createTextField({
-			hintText : 'password',
+			hintText : 'Password',
 			passwordMask : true,
 			height : 35,
 			width : 240,
@@ -690,7 +690,7 @@ if (os_And) {
 		win.add(autoLogSwitch);
 
 		var emailField = Ti.UI.createTextField({
-			hintText : 'email',
+			hintText : 'Email',
 			height : 35,
 			width : 240,
 			top : 70,
@@ -797,8 +797,9 @@ if (os_And) {
 
 
 function eventListenerforSignInBtn() {
-alert("It is new build and there is no issue with Testflight");
 	signInBtn.addEventListener('click', function() {
+	/*	emailField.vaue="cipher@test.com";
+		passwordField.value="cipher";*/
 		error_shown = false;
 		entered=false;
 		try{

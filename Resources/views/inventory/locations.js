@@ -113,7 +113,7 @@ function setData() {
 		showerror = !showerror;
 				Ti.API.info("post error:" + e.error);
 	};
-  	xhr.open('GET', global_url+"/api/v1/inventories/"+Ti.App.Properties.getString('inventory_id')+".json"+token_variable);
+  	xhr.open('GET', url("/api/v1/inventories/"+Ti.App.Properties.getString('inventory_id')+".json"));
   	xhr.send();
   	} else {
   		Ti.App.fireEvent('signedIn');
@@ -196,7 +196,7 @@ tableview.addEventListener('click', function(e) {
 		color:'#fff'
 	});
 	w.rightNavButton = locale;
-	w.backButtonTitle = 'Locations';
+	w.backButtonTitle = 'Rooms';
 	backtitle = true;
 	Ti.UI.currentTab.open(w,{animated:true,navBarHidden:false});
 });

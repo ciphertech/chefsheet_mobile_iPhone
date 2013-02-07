@@ -315,7 +315,7 @@ function setRestaurant(rid) {
 	}
 	
 	
-  	xhr.open('GET', global_url+"/api/v1/restaurants/"+rid+"/switch.json"+token_variable); // Changed 23rd B & Y
+  	xhr.open('GET',url("/api/v1/restaurants/"+rid+"/switch.json")); // Changed 23rd B & Y
   	xhr.send();	
 };
 
