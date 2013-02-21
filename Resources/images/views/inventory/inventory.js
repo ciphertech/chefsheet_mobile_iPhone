@@ -11,7 +11,7 @@ Ti.App.addEventListener('switchTab', function(e) {
 });
 
 var location_id = win.location_id;
-
+//alert("location_id:"+location_id);
 var oCnt = 0;
 var cCnt = 0;
 
@@ -198,7 +198,7 @@ function setData() {
 		//get one by one product
 
 		var product = items[location_id][i];
-		
+		//alert(product);
 		var unit = 'units';
 		unit_id = product.unit_id;
 		if (unit_id == null || unit_id == undefined || unit_id == 0) {
@@ -208,7 +208,10 @@ function setData() {
 			unit = units[unit_id][0].name;
 		}
 
-		
+		//var ma = JSON.stringify(product.productlocation.product.inventoryitems);
+		//var mas = ma.match(/quantity/i);
+		//Ti.API.info("inventoryitems:" + ma);
+
 		// p_name will contain product name one by one
 		var p_name = product.product ? product.product.name : product.name
 		var productitem = Titanium.UI.createLabel({
@@ -242,14 +245,9 @@ function setData() {
 		if (product.quantity != null || (product.inventory_unit_qty != 0 && product.inventory_unit_qty != null) || (product.recipe_unit_qty != 0 && product.recipe_unit_qty != null)) {
 
 			//only product that is counted
-			var temp =product.quantity;
-			
-				
-				if(product.quantity == null){
-					temp=0;
-				}
+			if (product.quantity != null && unit  != 'No Unit' ) {
 				var productunit = Ti.UI.createLabel({
-					text : temp + ' ' + unit,
+					text : product.quantity + ' ' + unit,
 					textAlign : 'right',
 					font : {
 						fontWeight : 'normal',
@@ -259,8 +257,7 @@ function setData() {
 					right : 10,
 					height : 16
 				});
-				
-			/* else if (product.inventory_unit_qty != 0 && product.inventory_unit_qty != null) {
+			} else if (product.inventory_unit_qty != 0 && product.inventory_unit_qty != null) {
 
 				var unit2 = 'units';
 				unit_id = product.inventory_unit_id;
@@ -303,7 +300,7 @@ function setData() {
 					height : 16
 				});
 			}
-*/
+
 			invComplete.push(product);
 			row.add(catThumb);
 			row.add(productitem);
@@ -348,11 +345,8 @@ function setData() {
             row.product_recipe_id=product.recipe_unit_id;         
             row.product_recipe_qty=product.recipe_unit_qty;
             row.product_recipe_unit=unit3;
-            row.product_price=product.price;
-            row.product_inventory_price=product.inventory_unit_price;
-            row.product_recipe_price=product.recipe_unit_price;
+            
          
-       
 			dataComplete.push(row);
 			cCnt++;
 		} else {
@@ -377,10 +371,7 @@ function setData() {
             row.product_inventory_unit=null;           
             row.product_recipe_id=null;
             row.product_recipe_qty=null;
-            row.product_recipe_unit=null;       
-             row.product_price=product.price;
-            row.product_inventory_price=product.inventory_unit_price;
-            row.product_recipe_price=product.recipe_unit_price;     
+            row.product_recipe_unit=null;            
            }catch(e){}
 			data.push(row);
 			oCnt++;
@@ -461,7 +452,7 @@ win.add(tvOutstanding);
 
 var completeLabel = Ti.UI.createLabel({
 	//text:'Completed Items',
-	text : 'Purchase Unit Counted Items',
+	text : 'Counted Items',
 	bottom : 204,
 	left : 20,
 	height : 'auto',
@@ -532,12 +523,7 @@ function popWin(e, popType) {
 		var rRecipe_unit_id='';
 		var rRecipe_unit_qty='';
 		var rRecipe_unit='';
-		var rProduct_price=0.0;
-        var rInventory_unit_price=0.0;
-        var rRecipe_unit_price=0.0;    
- 
 		var t = Titanium.UI.create2DMatrix();
-		
 		t = t.scale(0);
 
 		if (flowSwitch.value == true)
@@ -562,9 +548,6 @@ function popWin(e, popType) {
 			rRecipe_unit_id=e.row.product_recipe_id;
 			rRecipe_unit_qty=e.row.product_recipe_qty;
 			rRecipe_unit=e.row.product_recipe_unit;
-			rProduct_price=e.row.product_price;
-            rInventory_unit_price=e.row.product_inventory_price;
-            rRecipe_unit_price=e.row.product_recipe_price;    
 			
 		}
 
@@ -620,14 +603,7 @@ function popWin(e, popType) {
 			pInventory_unit: rInventory_unit,
 			pRecipe_unit_id : rRecipe_unit_id,
 			pRecipe_unit_qty : rRecipe_unit_qty,
-			pRecipe_unit : rRecipe_unit,
-			pProduct_price : rProduct_price,   			
-            pInventory_unit_price : rInventory_unit_price,
-            pRecipe_unit_price  :  rRecipe_unit_price,
-            pProduct_price :  rProduct_price,
-            pInventory_unit_price : rInventory_unit_price,
-            pRecipe_unit_price : rRecipe_unit_price	 
-			
+			pRecipe_unit : rRecipe_unit
 		});
 
 		// create first transform to go beyond normal size
@@ -671,7 +647,7 @@ function getGrpInv() {
 	Titanium.App.fireEvent('show_indicator');
 	var xhr = Ti.Network.createHTTPClient();
 	xhr.onload = function(e) {
-		
+		//alert("gotcha");
 		var items = JSON.parse(this.responseText);
 		var invGrp = _.groupBy(items.items, function(e) {
 			return e.location_id

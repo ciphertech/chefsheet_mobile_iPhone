@@ -1,5 +1,5 @@
 var win = Ti.UI.currentWindow;
-var temp_url = "http://chefsheet.herokuapp.com";      //"http://192.168.1.70:3000";               //"http://chefsheet-staging.herokuapp.com";                    // //  // // //B & Y 23_jan
+var temp_url = "http://chefsheet.herokuapp.com";    //"http://chefsheet.herokuapp.com";                    //"http://chefsheet-staging.herokuapp.com";                    // //  // // //B & Y 23_jan
 var os_And = (Ti.Platform.osname == 'android');  //B & Y 23_jan
 var global_url = temp_url;
 var token_variable="?auth_token=" + Ti.App.Properties.getString("token");  //B & Y 23_jan

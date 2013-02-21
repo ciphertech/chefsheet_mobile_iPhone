@@ -10,16 +10,6 @@ var location_id = win.location_id;
 var pickerUnits = Ti.UI.createPickerColumn({opacity:0,width:'200%'});
 var pickerCats = Ti.UI.createPickerColumn({opacity:0,width:'380%'});
 
-
-var item_names=[];
-
-var items = JSON.parse(Ti.App.Properties.getString("currInventory"));
-
-for(i=0;i<items[location_id].length;i++) {
-    item_names[i] = items[location_id][i].name + '';        
-}
-
-
 //hiding Indicator if it is open
 try{
 hideIndicator();
@@ -235,15 +225,7 @@ cancelBtn.addEventListener('click', function() {
 });
 
 invBtn.addEventListener('click', function() {
-	var item_present = true; 
-    for(var j=0; j<item_names.length; j++){
-        if(item_names[j]==nameField.value){            
-            item_present =false;
-            break;
-        }        
-    }
- 
-	if(nameField.value != prod_name && (item_present) ) {
+	if(nameField.value != prod_name) {
 		prod_id = 0;
 		var dialog = Ti.UI.createAlertDialog({
 		    cancel: 1,
@@ -259,9 +241,6 @@ invBtn.addEventListener('click', function() {
 		});
 	
 	}else{
-		if(item_present==false){
-			alert("Item already exists");
-		}
 		addItem();
 	}
 });	
@@ -287,15 +266,12 @@ function addItem() {
 		alertnoInternet.show();
 		}else{
 		
-		//alert("Item already exists");
-		}
+		alert("Sorry unable to add New Item");}
 		
 	};
 	// newer method - post directly to inventory
 	xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));
-	
 	if(prod_id!=0) {
-		
 		xhr.send({
 			"utf8":"✓",
 			"inventory[items_attributes][][restaurant_id]":Ti.App.Properties.getString('r_id'),
@@ -308,8 +284,6 @@ function addItem() {
 			//"commit":"Update Inventory"
 		});
 	} else {
-		
-	
 		xhr.send({
 			"utf8":"✓",
 			"inventory[items_attributes][][restaurant_id]":Ti.App.Properties.getString('r_id'),

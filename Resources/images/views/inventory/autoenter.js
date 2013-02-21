@@ -221,13 +221,9 @@ for(i=0;i<inventory.length;i++) {
 			}
 			Titanium.API.info("calc: "+calc);
 		}
-		if(scrollView.views[e.source.index].children[3].value==''){
-					if_changed_save=-99;
-		}
 	});
 	
 	parField.addEventListener('change', function(e) {
-		if_changed_save=i;
 		if(e.value && (scrollView.views[e.source.index].children[3].value || scrollView.views[e.source.index].children[3].hintText !="Count")) {
 			//var calc = e.value - scrollView.views[e.source.index].children[4].value;
 			var calc;
@@ -241,9 +237,6 @@ for(i=0;i<inventory.length;i++) {
 				scrollView.views[e.source.index].children[5].value=0;
 			}
 			Titanium.API.info("calc: "+calc);
-		}
-		if(scrollView.views[e.source.index].children[3].value==''){
-				scrollView.views[e.source.index].children[3].value=scrollView.views[e.source.index].children[3].hintText;
 		}
 	});
 	
@@ -287,8 +280,8 @@ try{
 		
 				updateInv();
 				
-		//		Ti.App.fireEvent('popClose');
-		//		win.close();
+				Ti.App.fireEvent('popClose');
+				win.close();
 	}				
 	if (i >= (scrollView.views.length )){  //scrollView.views.length-1 before changed to scrollView.views.length by yogesh
 		
@@ -309,8 +302,8 @@ scrollView.addEventListener('swipe', function(e)
 	Ti.API.info('ScrollView received swipe event, direction = ' + e.direction);
 	if(scrollView.currentPage == scrollView.views.length-1 && e.direction == 'left') {
 		 updateInv();
-//		Ti.App.fireEvent('popClose');
-//		win.close();
+		Ti.App.fireEvent('popClose');
+		win.close();
 	}
 });
 
@@ -324,7 +317,7 @@ dupi=-101;
 dupi2=-100;
 
 if(clo==2){
-//	updateInv2();
+	updateInv2();
 		return; 
 	
 }
@@ -346,14 +339,14 @@ rightNum.text=IntParse(rightNum.text)+1;
 if(runat != i){
 	runat=i;
 	current_scroll=i;
-	
+	//alert("c"+current_scroll);
 	if(current_scroll > last_scroll){
 		rightMove();
 	}else{
 		leftMove();
 	}
 	last_scroll=current_scroll;
-	
+	//alert("I ran in scroll"+runat);
 	
 }
 	Titanium.API.info("scrollEnd called");
@@ -363,7 +356,73 @@ if(runat != i){
 		completed = false;
 	}
 });
+/*
+// add button to dynamically add a view
+var add = Titanium.UI.createButton({
+	title:'Add',
+	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+});
+add.addEventListener('click',function()
+{
+	var newView = Ti.UI.createView({
+		backgroundColor:'purple'
+	});
+	var l = Ti.UI.createLabel({
+		text:'View ' + (scrollView.views.length+1),
+		color:'#fff',
+		width:'auto',
+		height:'auto'
+	});
+	newView.add(l);
+	scrollView.addView(newView);
+});
 
+// jump button to dynamically change go directly to a page (non-animated)
+var jump = Titanium.UI.createButton({
+	title:'Jump',
+	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+});
+jump.addEventListener('click',function()
+{
+	i = (scrollView.currentPage + 1) % scrollView.views.length;
+	scrollView.currentPage = i;
+});
+
+// change button to dynamically change a view
+var change = Titanium.UI.createButton({
+	title:'Change',
+	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+});
+change.addEventListener('click',function()
+{
+	var newView = Ti.UI.createView({
+		backgroundColor:'#ff9900'
+	});
+	var l = Ti.UI.createLabel({
+		text:'View (Changed) ' + (i+1),
+		color:'#fff',
+		height:'auto',
+		width:'auto'
+	});
+	newView.add(l);
+	var ar = [];
+	for (var x=0;x<scrollView.views.length;x++)
+	{
+		if (x==i)
+		{
+			Ti.API.info('SETTING TO NEW VIEW ' + x);
+			ar[x] = newView;
+		}
+		else
+		{
+			Ti.API.info('SETTING TO OLD VIEW ' + x);
+
+			ar[x] = scrollView.views[x];
+		}
+	}
+	scrollView.views = ar;
+});
+*/
 
 // move scroll view left
 function leftMove(){
@@ -463,7 +522,7 @@ right.addEventListener('click', function(e)
 	
 	
 	if (i === (scrollView.views.length-1)){ 
-	//	updateInv2();
+		updateInv2();
 		
 		return; 
 	}else{
@@ -619,57 +678,12 @@ function updateInv2() {
 
 						});
 					} else {
-						
-						//logic to map relation
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_Recipe=false;
-						var relation_between_recipe_inventory=false;
-									var purchase_Count=0;
-var inventory_Count=0;
-		try{			
-if(inventory[i].price>0  && inventory[i].inventory_unit_price>0  && inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory[i].price>0 && inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_Recipe=true;
-
-}else if (inventory[i].price>0 && inventory[i].inventory_unit_price>0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(inventory[i].recipe_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
- inventory_Count=(inventory[i].recipe_unit_price * scrollView.views[i].children[3].value)/inventory[i].inventory_unit_price;
- 
-
-}else if(relation_between_purchase_Recipe)
-{
- purchase_Count=(inventory[i].recipe_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
-
-}
-if(inventory[i].price==0||inventory[i].price==null){
-	purchase_Count=inventory[i].quantity;
-}
-}catch(ex){}
-				
-//end of logic
-
-						
 						var params3 ={
 							"utf8" : "✓",
 							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 							"inventory[items_attributes][][location_id]" : location_id,
 							"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
 							"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
-                        	"inventory[items_attributes][][inventory_unit_qty]" :inventory_Count,                 	
-                                            
 							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
 							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
 							"inventory[items_attributes][][id]" : inventory[i].id,
@@ -677,8 +691,9 @@ if(inventory[i].price==0||inventory[i].price==null){
 							"inventory[items_attributes][][_destroy]" : 0,
 							"inventory[items_attributes][][status]" : 1
 						}
-				
-						xhr.send(params3);
+						alert(params3);
+						xhr.send(params3							
+						);
 					}
 				}
                 }catch(e){}
@@ -686,7 +701,7 @@ if(inventory[i].price==0||inventory[i].price==null){
 			// for inventory count
 			try{
 				if (unitType.title == 'Inventory') {
-					
+					alert("in inventory");
 					if (inventory[i].product != null) {
 						xhr.send({
 							//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
@@ -704,53 +719,12 @@ if(inventory[i].price==0||inventory[i].price==null){
 
 						});
 					} else {
-						
-						//logic to map relation
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_recipe_inventory=false;
-									var purchase_Count=0;
-var recipe_Count=0;
-			try{		
-if(inventory[i].price>0 && inventory[i].inventory_unit_price>0 &&  inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory[i].price>0  && inventory[i].inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory[i].inventory_unit_price>0 && inventory[i].recipe_unit_price>0){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(inventory[i].inventory_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
- recipe_Count=(inventory[i].inventory_unit_price * scrollView.views[i].children[3].value)/inventory[i].recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
- purchase_Count=(inventory[i].inventory_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
-
-}
-if(inventory[i].price==0||inventory[i].price==null){
-	purchase_Count=inventory[i].quantity;
-}
-	}catch(ex){}			
-//end of logic
 						var params2 ={
 							"utf8" : "✓",
 							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 							"inventory[items_attributes][][location_id]" : location_id,
 							"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
 							"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
 							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
 							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
 							"inventory[items_attributes][][id]" : inventory[i].id,
@@ -758,7 +732,7 @@ if(inventory[i].price==0||inventory[i].price==null){
 							"inventory[items_attributes][][_destroy]" : 0,
 							"inventory[items_attributes][][status]" : 1
 						}
-						
+						alert(params2)
 						xhr.send(params2);
 					}
 				}
@@ -785,46 +759,6 @@ if(inventory[i].price==0||inventory[i].price==null){
 
 						});
 					} else {
-										//logic to map relation
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var inventory_Count=0;
-                var recipe_Count=0;
-			try{		
-if(inventory[i].price>0 && inventory[i].inventory_unit_price>0  && inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory[i].price>0  && inventory[i].inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory[i].price>0 && inventory[i].recipe_unit_price>0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- inventory_Count=(inventory[i].price * scrollView.views[i].children[3].value)/inventory[i].inventory_unit_price ;
- recipe_Count=(inventory[i].price  * scrollView.views[i].children[3].value)/inventory[i].recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  inventory_Count=(inventory[i].price * scrollView.views[i].children[3].value)/inventory[i].inventory_unit_price ;
-
-}else if(relation_between_recipe_inventory)
-{
-   recipe_Count=(inventory[i].price  * scrollView.views[i].children[3].value)/inventory[i].recipe_unit_price;
-
-
-}
-}catch(ex){}				
-//end of logic
 						var params =
 						{
 							"utf8" : "✓",
@@ -832,8 +766,6 @@ if(relation_between_purchase_inventory_recipe)
 							"inventory[items_attributes][][location_id]" : location_id,
 							"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
 							"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][inventory_unit_qty]" : inventory_Count,
-							"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,							
 							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
 							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
 							"inventory[items_attributes][][id]" : inventory[i].id,
@@ -842,7 +774,7 @@ if(relation_between_purchase_inventory_recipe)
 							"inventory[items_attributes][][status]" : 1
 					
 					}
-					
+					alert(params);
 					xhr.send(params);
 					}
 				}
@@ -895,264 +827,132 @@ xhr.onload = function(e) {
 if(if_changed_save==i)
 {
 
-if(scrollView.views[i].children[3].value !=null || scrollView.views[i].children[4].value !=null || scrollView.views[i].children[5].value !=null){
-			xhr.onerror = function(e) {
-				Ti.API.info("post error:" + e.error);
-							};
-			xhr.open("PUT", url('/manager/inventories/'+Ti.App.Properties.getString('inventory_id')+'.json'));
-			
-			//alert(inventory[i].product);
-			
-			// for recipe count
-			try{
-				if (unitType.title == 'Recipe') {
-					if (inventory[i].product != null) {
-						xhr.send({
-							//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
-							"utf8" : "✓",
-							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-							"inventory[items_attributes][][location_id]" : location_id,
-							"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
-							"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
-							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
-							"inventory[items_attributes][][id]" : inventory[i].id,
-							"inventory[items_attributes][][product_id]" : inventory[i].product_id,
-							"inventory[items_attributes][][_destroy]" : 0,
-							"inventory[items_attributes][][status]" : 1
-
-						});
-					} else {
-						
-						//logic to map relation
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_Recipe=false;
-						var relation_between_recipe_inventory=false;
-									var purchase_Count=0;
-var inventory_Count=0;
-				try{	
-if(inventory[i].price>0  && inventory[i].inventory_unit_price>0  && inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory[i].price>0   && inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_Recipe=true;
-
-}else if (inventory[i].price>0 && inventory[i].inventory_unit_price>0){
 	
-	relation_between_recipe_inventory=true;
-}
+if (scrollView.views[i].children[3].value != null || scrollView.views[i].children[4].value != null || scrollView.views[i].children[5].value != null) {
 
-
-if(relation_between_purchase_inventory_recipe)
-{
+	xhr.onerror = function(e) {
 	
- purchase_Count=(inventory[i].recipe_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
- inventory_Count=(inventory[i].recipe_unit_price * scrollView.views[i].children[3].value)/inventory[i].inventory_unit_price;
- 
+		Ti.API.info("post error:" + e.error);
+	};
+	xhr.open("PUT", url('/manager/inventories/' + Ti.App.Properties.getString('inventory_id') + '.json'));
 
-}else if(relation_between_purchase_Recipe)
-{
- purchase_Count=(inventory[i].recipe_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
+	//alert(inventory[i].product);
 
-}
-if(inventory[i].price==0||inventory[i].price==null){
-	purchase_Count=inventory[i].quantity;
-}
-			}catch(ex){}	
-//end of logic
+	// for recipe count
+	try {
+		if (unitType.title == 'Recipe') {
+			if (inventory[i].product) {
+				xhr.send({
+					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
+					"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
 
-						
-						var params3 ={
-							"utf8" : "✓",
-							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-							"inventory[items_attributes][][location_id]" : location_id,
-							"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
-							"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
-                        	"inventory[items_attributes][][inventory_unit_qty]" :inventory_Count,                 	
-                                            
-							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
-							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
-							"inventory[items_attributes][][id]" : inventory[i].id,
-							"inventory[items_attributes][][name]" : inventory[i].name,
-							"inventory[items_attributes][][_destroy]" : 0,
-							"inventory[items_attributes][][status]" : 1
-						}
-				
-						xhr.send(params3);
-					}
-				}
-                }catch(e){}
-			
-			// for inventory count
-			try{
-				if (unitType.title == 'Inventory') {
-				
-					if (inventory[i].product != null) {
-						xhr.send({
-							//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
-							"utf8" : "✓",
-							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-							"inventory[items_attributes][][location_id]" : location_id,
-							"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
-							"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
-							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
-							"inventory[items_attributes][][id]" : inventory[i].id,
-							"inventory[items_attributes][][product_id]" : inventory[i].product_id,
-							"inventory[items_attributes][][_destroy]" : 0,
-							"inventory[items_attributes][][status]" : 1
-
-						});
-					} else {
-						
-						//logic to map relation
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_recipe_inventory=false;
-									var purchase_Count=0;
-var recipe_Count=0;
-					try{
-if(inventory[i].price>0  && inventory[i].inventory_unit_price>0  && inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory[i].price>0  && inventory[i].inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory[i].inventory_unit_price>0 && inventory[i].recipe_unit_price>0  ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(inventory[i].inventory_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
- recipe_Count=(inventory[i].inventory_unit_price * scrollView.views[i].children[3].value)/inventory[i].recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
- purchase_Count=(inventory[i].inventory_unit_price * scrollView.views[i].children[3].value)/inventory[i].price ;
-
-}
-
-if(inventory[i].price==0||inventory[i].price==null){
-	purchase_Count=inventory[i].quantity;
-}
-	}catch(ex){}			
-//end of logic
-						var params2 ={
-							"utf8" : "✓",
-							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-							"inventory[items_attributes][][location_id]" : location_id,
-							"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
-							"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
-							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
-							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
-							"inventory[items_attributes][][id]" : inventory[i].id,
-							"inventory[items_attributes][][name]" : inventory[i].name,
-							"inventory[items_attributes][][_destroy]" : 0,
-							"inventory[items_attributes][][status]" : 1
-						}
-						
-						xhr.send(params2);
-					}
-				}
-                }catch(e){}
-			
-			
-			// for purchase count
-			try{
-				if (unitType.title == 'Purchase') {
-					if (inventory[i].product != null) {
-						xhr.send({
-							//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
-							"utf8" : "✓",
-							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-							"inventory[items_attributes][][location_id]" : location_id,
-							"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
-							"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
-							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
-							"inventory[items_attributes][][id]" : inventory[i].id,
-							"inventory[items_attributes][][product_id]" : inventory[i].product_id,
-							"inventory[items_attributes][][_destroy]" : 0,
-							"inventory[items_attributes][][status]" : 1
-
-						});
-					} else {
-										//logic to map relation
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var inventory_Count=0;
-                var recipe_Count=0;
-try{					
-if(inventory[i].price>0 && inventory[i].inventory_unit_price>0  && inventory[i].recipe_unit_price>0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory[i].price>0  && inventory[i].inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory[i].price>0 && inventory[i].recipe_unit_price>0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- inventory_Count=(inventory[i].price * scrollView.views[i].children[3].value)/inventory[i].inventory_unit_price ;
- recipe_Count=(inventory[i].price  * scrollView.views[i].children[3].value)/inventory[i].recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  inventory_Count=(inventory[i].price * scrollView.views[i].children[3].value)/inventory[i].inventory_unit_price ;
-
-}else if(relation_between_recipe_inventory)
-{
-   recipe_Count=(inventory[i].price  * scrollView.views[i].children[3].value)/inventory[i].recipe_unit_price;
-}
-}catch(ex){}				
-//end of logic
-						var params =
-						{
-							"utf8" : "✓",
-							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
-							"inventory[items_attributes][][location_id]" : location_id,
-							"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
-							"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
-							"inventory[items_attributes][][inventory_unit_qty]" : inventory_Count,
-							"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,							
-							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
-							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
-							"inventory[items_attributes][][id]" : inventory[i].id,
-							"inventory[items_attributes][][name]" : inventory[i].name,
-							"inventory[items_attributes][][_destroy]" : 0,
-							"inventory[items_attributes][][status]" : 1
-					
-					}
-					
-					xhr.send(params);
-					}
-				}
-                }catch(e){}
-			
-			
-			
+				});
+			} else {
+        	xhr.send({
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][recipe_unit_id]" : inventory[i].recipe_unit_id ? inventory[i].recipe_unit_id : null,
+					"inventory[items_attributes][][recipe_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][name]" : inventory[i].name,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+				});
+			}
 		}
+	} catch(e) {
+	}
+
+	// for inventory count
+	try {
+		if (unitType.title == 'Inventory') {
+			if (inventory[i].product != null) {
+				var params ={
+							"utf8" : "✓",
+							//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+							"inventory[items_attributes][][location_id]" : location_id,
+							"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
+							"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+							"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+							"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+							"inventory[items_attributes][][id]" : inventory[i].id,
+							"inventory[items_attributes][][name]" : inventory[i].name,
+							"inventory[items_attributes][][_destroy]" : 0,
+							"inventory[items_attributes][][status]" : 1
+						}
+						alerts(params)
+						xhr.send(params);
+			} else {
+				xhr.send({
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][inventory_unit_id]" : inventory[i].inventory_unit_id ? inventory[i].inventory_unit_id : null,
+					"inventory[items_attributes][][inventory_unit_qty]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][name]" : inventory[i].name,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+				});
+			}
+		}
+	} catch(e) {
+	}
+
+	// for purchase count
+	try {
+		if (unitType.title == 'Purchase') {
+			if (inventory[i].product != null) {
+				xhr.send({
+					//"inventory[user_id]":Ti.App.Properties.getString('user_id'),
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
+					"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][product_id]" : inventory[i].product_id,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+
+				});
+			} else {
+				xhr.send({
+					"utf8" : "✓",
+					//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
+					"inventory[items_attributes][][location_id]" : location_id,
+					"inventory[items_attributes][][unit_id]" : inventory[i].unitid ? inventory[i].unitid : null,
+					"inventory[items_attributes][][quantity]" : scrollView.views[i].children[3].value ? scrollView.views[i].children[3].value : inventory[i].quantity,
+					"inventory[items_attributes][][par]" : scrollView.views[i].children[4].value ? scrollView.views[i].children[4].value : inventory[i].par,
+					"inventory[items_attributes][][order]" : scrollView.views[i].children[5].value ? scrollView.views[i].children[5].value : inventory[i].order,
+					"inventory[items_attributes][][id]" : inventory[i].id,
+					"inventory[items_attributes][][name]" : inventory[i].name,
+					"inventory[items_attributes][][_destroy]" : 0,
+					"inventory[items_attributes][][status]" : 1
+				});
+			}
+		}
+	} catch(e) {
+	}
+
+}
 
 setTimeout(function() {
 
@@ -1189,29 +989,37 @@ x=0;
 
 		clickedT = 2;
 
+		/*alert("Itemname000=="+scrollView.views[i].children[0].text);
+		 alert("Itemname111=="+scrollView.views[i].children[1].text);
+		 alert("Itemname222=="+scrollView.views[i].children[2].text);
+		 alert("Itemname333=="+scrollView.views[i].children[3].value);
+		 alert("Itemname444=="+scrollView.views[i].children[4].value);
+		 alert("Itemname555=="+scrollView.views[i].children[5].text);
+		 alert("Itemname666=="+scrollView.views[i].children[6].text);
+		 alert("Itemname777=="+scrollView.views[i].children[7].text);
+		 alert("Itemname888=="+scrollView.views[i].children[8].text);
+		 alert("Itemname999=="+scrollView.views[i].children[9].text);*/
 
 		try {
-if(inventory[i].inventory_unit_qty != null){
+
 			scrollView.views[i].children[9].text = units[inventory[i].inventory_unit_id][0].name === null ? '' : units[inventory[i].inventory_unit_id][0].name;
 			//unitLabel
 			scrollView.views[i].children[3].hintText = inventory[i].inventory_unit_qty === null ? 'Count' : inventory[i].inventory_unit_qty;
 			unitType.title = "Inventory";
 			//QuanityTextBox
 			//	alert(unit = units[inventory[i].unit_id][0].name);
-		}
 		} catch(ex) {
 			clickedT = 3;
 			try {
-if (inventory[i].recipe_unit_qty !== null) {
+
 				scrollView.views[i].children[9].text = units[inventory[i].recipe_unit_id][0].name === null ? '' : units[inventory[i].recipe_unit_id][0].name;
-				
-					scrollView.views[i].children[3].hintText = inventory[i].recipe_unit_qty === null ? 'Count' :inventory[i].recipe_unit_qty ;
-				
-				
-				
+				if (inventory[i].recipe_unit_qty !== null) {
+					scrollView.views[i].children[3].hintText = inventory[i].recipe_unit_qty;
+				}else{
+					scrollView.views[i].children[3].hintText='Count';
+				}
 
 				unitType.title = "Recipe";
-			}
 
 			} catch(ex) {
 				unitType.title = "Purchase";
@@ -1223,14 +1031,16 @@ if (inventory[i].recipe_unit_qty !== null) {
 		clickedT = 3;
 
 		try {
-if (inventory[i].recipe_unit_qty !== null) {
+
 			scrollView.views[i].children[9].text = units[inventory[i].recipe_unit_id][0].name === null ? '' : units[inventory[i].recipe_unit_id][0].name;
-			
-				scrollView.views[i].children[3].hintText = inventory[i].recipe_unit_qty === null ? 'Count' :inventory[i].recipe_unit_qty ;
-				
+			if (inventory[i].recipe_unit_qty !== null) {
+				scrollView.views[i].children[3].hintText = inventory[i].recipe_unit_qty;
+			}else{
+					scrollView.views[i].children[3].hintText='Count';
+				}
 
 			unitType.title = "Recipe";
-}
+
 		} catch(ex) {
 			unitType.title = "Purchase";
 			clickedT = 1;
@@ -1239,17 +1049,17 @@ if (inventory[i].recipe_unit_qty !== null) {
 		clickedT = 1;
 
 		try {
-if (inventory[i].quantity !== null) {
-			scrollView.views[i].children[9].text = units[inventory[i].unit_id][0].name === null ? 'Count' : units[inventory[i].unit_id][0].name;
-			
-				scrollView.views[i].children[3].hintText = inventory[i].quantity  === null ? 'Count' : inventory[i].quantity ;
-			
-			
-			
+
+			scrollView.views[i].children[9].text = units[inventory[i].unit_id][0].name === null ? 'Qty' : units[inventory[i].unit_id][0].name;
+			if (inventory[i].quantity !== null) {
+				scrollView.views[i].children[3].hintText = inventory[i].quantity;
+			}else{
+					scrollView.views[i].children[3].hintText='Count';
+			}
 
 			unitType.title = "Purchase";
 			
-		}
+			
 		} catch(ex) {
 
 		}

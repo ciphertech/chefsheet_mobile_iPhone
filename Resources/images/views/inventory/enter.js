@@ -18,14 +18,7 @@ var inventory_unit=win.pInventory_unit;
 var recipe_unit_id=win.pRecipe_unit_id;
 var recipe_unit_qty=win.pRecipe_unit_qty;
 var recipe_unit=win.pRecipe_unit;
-
-var product_price = win.pProduct_price;  			
-var inventory_unit_price = win.pInventory_unit_price;
-var recipe_unit_price  =  win.pRecipe_unit_price;	
-
 var if_changed_save=false;
-
-
 Ti.API.info("inv_id:"+inv_id);
 /*pInventory_unit_qty=e.row.product_recipe_qty;
 			pInventory_unit_id=e.row.product_inventory_id;
@@ -166,7 +159,6 @@ win.add(unitLabel);
 	
 qtyField.addEventListener('change', function(e) {
 	if_changed_save=true;
-	
 		if(e.value && (parField.value || parField.hintText !="Par")) {
 			var calc;
 			if (!parField.value && parField.hintText !="Par") {
@@ -180,15 +172,10 @@ qtyField.addEventListener('change', function(e) {
 			}
 			Titanium.API.info("calc: "+calc);
 		}
-		if(qtyField.value==''){
-					if_changed_save=false;
-		}
 	});
 	
 	parField.addEventListener('change', function(e) {
-			if_changed_save=true;
-			
-			if(e.value && (qtyField.value || qtyField.hintText !="Count")) {
+		if(e.value && (qtyField.value || qtyField.hintText !="Count")) {
 			//var calc = e.value - parField.value;
 			var calc;
 			if (!qtyField.value && qtyField.hintText !="Qty") {
@@ -201,9 +188,6 @@ qtyField.addEventListener('change', function(e) {
 				orderField.value=0;
 			}
 			Titanium.API.info("calc: "+calc);
-		}
-		if(qtyField.value==''){
-				qtyField.value=qtyField.hintText;
 		}
 	});
 
@@ -281,408 +265,118 @@ win.addEventListener('swipe', enterItem);
 invBtn.addEventListener('click', enterItem);
 
 function enterItem() {
-	if(if_changed_save){
-		
 	var xhr = Titanium.Network.createHTTPClient();
 		xhr.onload = function(e) {
 Ti.App.fireEvent('popClose');
 		win.close();
 		};
 		xhr.onerror = function(e) {
-		
 			Ti.API.info("post error:" + e.error);
 
 		};
-		
 		xhr.open("PUT", url('/manager/inventories/' + Ti.App.Properties.getString('inventory_id') + '.json'));
-	
 		try {
 			if (unitType.title == 'Purchase') {
-			
 				if (product_id > 0) {
-					
-					
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var inventory_Count=0;
-                var recipe_Count=0;
-
-try{					
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (product_price>0  && inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (product_price>0   && recipe_unit_price >0){
-	
-	relation_between_purchase_recipe=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
- recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
-
-}else if(relation_between_purchase_recipe)
-{
-  recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-}
-					
-}catch(exx){
-	
-}											
-					
-					
-					
-						var params={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][unit_id]":product_unit_id,
 						"inventory[items_attributes][][quantity]" : qtyField.value ? qtyField.value : product_quantity,
-						"inventory[items_attributes][][inventory_unit_qty]" : inventory_Count,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,	
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][product_id]" : product_id,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					};
-						
-					xhr.send(params);
-					
+
+					});
 				} else {
-		
-					var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var inventory_Count=0;
-                var recipe_Count=0;
-
-try{					
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (product_price>0  && inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (product_price>0   && recipe_unit_price >0){
-	
-	relation_between_purchase_recipe=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
- recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
-
-}else if(relation_between_purchase_recipe)
-{
-  recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-}
-					
-}catch(exx){
-	
-}								
-		
-					var params={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][unit_id]":product_unit_id,
 						"inventory[items_attributes][][quantity]" : qtyField.value ? qtyField.value : product_quantity,
-						"inventory[items_attributes][][inventory_unit_qty]" : inventory_Count,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,	
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					};
-						
-					xhr.send(params);
+					});
 					
 				}
 			} else if (unitType.title == 'Inventory') {
 
 				if (product_id > 0) {
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_recipe_inventory=false;
-						var purchase_Count=0;
-                var recipe_Count=0;
-
-					
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory_unit_price>0 &&  product_price>0  )
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory_unit_price>0 &&   recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
- recipe_Count=(inventory_unit_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
-
-}
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- 
-					
-					var parms2={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][inventory_unit_id]":inventory_unit_id,
 						"inventory[items_attributes][][inventory_unit_qty]" : qtyField.value ? qtyField.value : 0,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][product_id]" : product_id,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					}
-					xhr.send(parms2);
 
+					});
 				} else {
-		
- 	var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_recipe_inventory=false;
-						var purchase_Count=0;
-                var recipe_Count=0;
-
-					
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory_unit_price>0 &&  product_price>0  )
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory_unit_price>0 &&   recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
- recipe_Count=(inventory_unit_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
-
-}
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- 
-					
-					var parms2={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][inventory_unit_id]":inventory_unit_id,
 						"inventory[items_attributes][][inventory_unit_qty]" : qtyField.value ? qtyField.value : 0,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					}
-					xhr.send(parms2);
+					});
 
 				}
 				
 
 			} else if (unitType.title == 'Recipe') {
 				if (product_id > 0) {
-					
-					var relation_between_purchase_inventory_recipe=false;
-						var relation_between_recipe_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var purchase_Count=0;
-                var inventory_Count=0;
-
-					//****
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (recipe_unit_price>0 &&  product_price>0 )
-{
-relation_between_purchase_recipe=true;
-
-}else if (inventory_unit_price>0   && recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
- inventory_Count=(recipe_unit_price * qtyField.value)/inventory_unit_price;
-
-
-}else if(relation_between_purchase_recipe)
-{
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
-
-}
-
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- var params3={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][recipe_unit_id]":recipe_unit_id,
 						"inventory[items_attributes][][recipe_unit_qty]" : qtyField.value ? qtyField.value :0,
-						"inventory[items_attributes][][quantity]" : purchase_Count, 
-                        	"inventory[items_attributes][][inventory_unit_qty]" :inventory_Count,          
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
+						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][product_id]" : product_id,
-						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-				};
-					xhr.send(params3);
-				
+
+					});
 				} else {
-				
- 
- 	var relation_between_purchase_inventory_recipe=false;
-						var relation_between_recipe_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var purchase_Count=0;
-                var inventory_Count=0;
-
-					//****
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (recipe_unit_price>0 &&  product_price>0 )
-{
-relation_between_purchase_recipe=true;
-
-}else if (inventory_unit_price>0   && recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
- inventory_Count=(recipe_unit_price * qtyField.value)/inventory_unit_price;
-
-
-}else if(relation_between_purchase_recipe)
-{
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
-
-}
-
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- var params3={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][recipe_unit_id]":recipe_unit_id,
 						"inventory[items_attributes][][recipe_unit_qty]" : qtyField.value ? qtyField.value :0,
-						"inventory[items_attributes][][quantity]" : purchase_Count, 
-                        	"inventory[items_attributes][][inventory_unit_qty]" :inventory_Count,          
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-				};
-					xhr.send(params3);
+					});
 				}
 				
 			}
-		} 
-		catch(e) {		} 
-		}else{
-			Ti.App.fireEvent('popClose');
-		win.close();
-		}
+		} catch(e) {		}
 	
 };
 
@@ -747,7 +441,6 @@ if (inventory_unit_qty != null) {
 	function enterItem2() {
 
 		//alert("productlocation_id:"+location_id);
-		if(if_changed_save){
 		var xhr = Titanium.Network.createHTTPClient();
 		xhr.onload = function(e) {
 
@@ -757,391 +450,108 @@ if (inventory_unit_qty != null) {
 
 		};
 		xhr.open("PUT", url('/manager/inventories/' + Ti.App.Properties.getString('inventory_id') + '.json'));
-		
-			try {
+		try {
 			if (unitType.title == 'Purchase') {
-				alert("I am in ");
 				if (product_id > 0) {
-					
-					
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var inventory_Count=0;
-                var recipe_Count=0;
-
-try{					
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (product_price>0  && inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (product_price>0   && recipe_unit_price >0){
-	
-	relation_between_purchase_recipe=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
- recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
-
-}else if(relation_between_purchase_recipe)
-{
-  recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-}
-					
-}catch(exx){
-	
-}											
-					
-					
-					
-						var params={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][unit_id]":product_unit_id,
 						"inventory[items_attributes][][quantity]" : qtyField.value ? qtyField.value : product_quantity,
-						"inventory[items_attributes][][inventory_unit_qty]" : inventory_Count,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,	
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][product_id]" : product_id,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					};
-						
-					xhr.send(params);
-					
+
+					});
 				} else {
-		
-					var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var inventory_Count=0;
-                var recipe_Count=0;
-
-try{					
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (product_price>0  && inventory_unit_price>0)
-{
-relation_between_purchase_inventory=true;
-
-}else if (product_price>0   && recipe_unit_price >0){
-	
-	relation_between_purchase_recipe=true;
-}
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
- recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  inventory_Count=(product_price * qtyField.value)/inventory_unit_price ;
-
-}else if(relation_between_purchase_recipe)
-{
-  recipe_Count=(product_price * qtyField.value)/recipe_unit_price;
-
-}
-					
-}catch(exx){
-	
-}								
-		
-					var params={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][unit_id]":product_unit_id,
 						"inventory[items_attributes][][quantity]" : qtyField.value ? qtyField.value : product_quantity,
-						"inventory[items_attributes][][inventory_unit_qty]" : inventory_Count,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,	
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					};
-						
-					xhr.send(params);
+					});
 					
 				}
 			} else if (unitType.title == 'Inventory') {
 
 				if (product_id > 0) {
-						var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_recipe_inventory=false;
-						var purchase_Count=0;
-                var recipe_Count=0;
-
-					
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory_unit_price>0 &&  product_price>0  )
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory_unit_price>0 &&   recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
- recipe_Count=(inventory_unit_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
-
-}
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- 
-					
-					var parms2={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][inventory_unit_id]":inventory_unit_id,
 						"inventory[items_attributes][][inventory_unit_qty]" : qtyField.value ? qtyField.value : 0,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][product_id]" : product_id,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					}
-					xhr.send(parms2);
 
+					});
 				} else {
-		
- 	var relation_between_purchase_inventory_recipe=false;
-						var relation_between_purchase_inventory=false;
-						var relation_between_recipe_inventory=false;
-						var purchase_Count=0;
-                var recipe_Count=0;
-
-					
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (inventory_unit_price>0 &&  product_price>0  )
-{
-relation_between_purchase_inventory=true;
-
-}else if (inventory_unit_price>0 &&   recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
- recipe_Count=(inventory_unit_price * qtyField.value)/recipe_unit_price;
-
-
-}else if(relation_between_purchase_inventory)
-{
-  purchase_Count=(inventory_unit_price * qtyField.value)/product_price ;
-
-}
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- 
-					
-					var parms2={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][inventory_unit_id]":inventory_unit_id,
 						"inventory[items_attributes][][inventory_unit_qty]" : qtyField.value ? qtyField.value : 0,
-						"inventory[items_attributes][][recipe_unit_qty]" : recipe_Count,
-							"inventory[items_attributes][][quantity]" : purchase_Count, 
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-					}
-					xhr.send(parms2);
+					});
 
 				}
 				
 
 			} else if (unitType.title == 'Recipe') {
 				if (product_id > 0) {
-					
-					var relation_between_purchase_inventory_recipe=false;
-						var relation_between_recipe_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var purchase_Count=0;
-                var inventory_Count=0;
-
-					//****
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (recipe_unit_price>0 &&  product_price>0 )
-{
-relation_between_purchase_recipe=true;
-
-}else if (inventory_unit_price>0   && recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
- inventory_Count=(recipe_unit_price * qtyField.value)/inventory_unit_price;
-
-
-}else if(relation_between_purchase_recipe)
-{
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
-
-}
-
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- var params3={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][recipe_unit_id]":recipe_unit_id,
 						"inventory[items_attributes][][recipe_unit_qty]" : qtyField.value ? qtyField.value :0,
-						"inventory[items_attributes][][quantity]" : purchase_Count, 
-                        	"inventory[items_attributes][][inventory_unit_qty]" :inventory_Count,          
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
+						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][product_id]" : product_id,
-						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-				};
-					xhr.send(params3);
-				
+
+					});
 				} else {
-				
- 
- 	var relation_between_purchase_inventory_recipe=false;
-						var relation_between_recipe_inventory=false;
-						var relation_between_purchase_recipe=false;
-						var purchase_Count=0;
-                var inventory_Count=0;
-
-					//****
-					
-try{							
-if(product_price>0  && inventory_unit_price>0  && recipe_unit_price >0)
-{
-relation_between_purchase_inventory_recipe=true;
-
-}else if (recipe_unit_price>0 &&  product_price>0 )
-{
-relation_between_purchase_recipe=true;
-
-}else if (inventory_unit_price>0   && recipe_unit_price >0 ){
-	
-	relation_between_recipe_inventory=true;
-}
-
-
-
-if(relation_between_purchase_inventory_recipe)
-{
-	
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
- inventory_Count=(recipe_unit_price * qtyField.value)/inventory_unit_price;
-
-
-}else if(relation_between_purchase_recipe)
-{
- purchase_Count=(recipe_unit_price * qtyField.value)/product_price ;
-
-}
-
-if(!(product_price>0) || product_price == null){
-	purchase_Count=product_qty;
-}
-}catch(exx){}							
- var params3={
+					xhr.send({
 						//"inventory[user_id]":Ti.App.Properties.getString('r_id'),
 						"utf8" : "✓",
 						"inventory[items_attributes][][location_id]" : location_id,
 						//"inventory[items_attributes][][recipe_unit_id]":recipe_unit_id,
 						"inventory[items_attributes][][recipe_unit_qty]" : qtyField.value ? qtyField.value :0,
-						"inventory[items_attributes][][quantity]" : purchase_Count, 
-                        	"inventory[items_attributes][][inventory_unit_qty]" :inventory_Count,          
 						"inventory[items_attributes][][par]" : parField.value ? parField.value : product_par,
 						"inventory[items_attributes][][order]" : orderField.value ? orderField.value : product_order,
 						"inventory[items_attributes][][id]" : inv_id,
 						"inventory[items_attributes][][name]" : product_name,
 						"inventory[items_attributes][][_destroy]" : 0,
 						"inventory[items_attributes][][status]" : 1
-				};
-					xhr.send(params3);
+					});
 				}
 				
+
 			}
-		} 
-		catch(e) {		} 
-		
-		}else{}
+		} catch(e) {		}
 	};
 
